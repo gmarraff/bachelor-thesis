@@ -1,0 +1,33 @@
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = ../../tesi.tex
+\subsection{Jira}
+Jira\footcite{site:jira} è uno strumento rilasciato da Atlassian per gestire tutta la componente organizzativa del ciclo di vita del software, è ideato per supportare i modelli agili ed è lo strumento più utilizzato dalle aziende che ne adottano le metodologie. \\
+Offre funzionalità di \textit{Project Managment}, \textit{Issue Tracking}, \textit{Agile Reporting} e \textit{Roadmap Planning}.
+All'interno dell'azienda viene ad esempio utilizzato per la gestione delle SCRUM board e del release planning, oltre che a tutti gli aspetti della gestione di progetto.
+\subsection{Confluence}
+Confluence\footcite{site:confluence} è uno strumento rilasciato sempre da Atlassian per la gestione della parte documentale non per forza legata alla documentazione del software: descrizioni di procedure, guide per installazioni, inventario indirizzi macchine virtuali e tutte le informazioni necessarie per distribuire la conoscenza aziendale a tutti i dipendenti. \\
+L'azienda ha adottato Confluence per racchiudere in un punto centrale tutte queste informazioni, permettendo anche di commentare i documenti scritti da altre persone in modo da migliorare attivamente la qualità della documentazione. \\
+Una parte del mio progetto consisteva nello scrivere una guida su Confluence per l'esecuzione dei test di carico.
+\subsection{Gitlab}
+Il versionamento degli applicativi viene fatto tramite Git\footcite{site:git} e i repository sono ospitati su Gitlab\footcite{site:gitlab}: una piattaforma che permette la gestione centralizzate dei repository Git, permettendo l'amministrazione dei permessi d'accesso tramite una semplice interfaccia grafica.
+Tutti gli applicativi e le configurazioni dell'infrastruttura vengono ospitati sulla piattaforma e il versionamento segue le regole del Git-Flow: le funzionalità nuove vengono sviluppate su un branch dedicato, per poi essere spostate successivamente nei \gls{branch} di sviluppo, accettazione e infine produzione. \\
+Il rispetto del Git-Flow non ha solo scopo formale: la definizione corretta dei branch scatena tutto un processo che dall'esecuzione dei test effettua il \gls{deploy} dell'applicazione su Artifactory. \\
+Questo procedimento prende il nome di \gls{integrazione-continua} e viene gestito da Jenkins.
+\subsection{Jenkins}
+Jenkins\footcite{site:jenkins} è uno strumento open source sviluppato dalla Jenkins CI community che permette l'implementazione di sistemi di \gls{integrazione-continua} su web-server Java. \\
+Jenkins è molto flessibile, permette la sua esecuzione in modo automatizzato e/o manuale ed è predisposto per essere esteso tramite plugin scritti dalla community. \\
+All'interno dell'azienda la sua esecuzione è innescata dai commit su gitlab e, in base al \gls{branch} di appartenenza del commit, scatena una serie di operazioni volete ad automatizzare la verifica, validazione e distribuzione su Artifactory del software.
+\subsection{Artifactory}
+Artifactory\footcite{site:artifactory} è uno strumento di repository per pacchetti applicativi (binaries) sviluppato da JFrog, questo permette il versionamento delle \gls{build} e una conseguente diminuzione dei tempi di \gls{deploy} dell'applicativo.
+All'interno dell'azienda, Jenkins effettua la \gls{build} dei codici sorgenti e li carica su Artifactory; questi pacchetti, stabili e versionati, vengono poi indirizzati dai sistemi di \gls{cfg-mgmt} per essere installati sui server operativi.
+\subsection{Puppet Enterprise}
+Puppet Enterprise\footcite{site:puppet} la versione Enterprise dello strumento di \gls{cfg-mgmt} Puppet, questa piattaforma offre una semplice gestione della configurazione per grandi flotte di server in modo completamente automatizzato e parallelo, con la possibilità di gestire la propagazione delle modifiche tramite un'intuitiva interfaccia grafica.\\
+All'interno dell'azienda lo strumento viene utilizzato per applicare le modifiche ai server in modo rapido e affidabile.
+\subsection{Foreman}
+Foreman\footcite{site:foreman} è uno strumento per la completa gestione del ciclo di vita delle macchine fisiche e/o virtuali. Si presente come un'interfaccia grafica e permette l'approvvigionamento dei server sia su \gls{datacenter} privati che soluzioni nel cloud. \\
+All'interno dell'azienda il team infrastrutture crea dei modelli di macchine interfacciandosi al \gls{datacenter} privato, mentre i team di sviluppo personalizzano questi modelli per creare le macchine necessarie al funzionamento dell'applicativo desiderato.
+\subsection{Oracle Secure Global Desktop}
+Oracle secure global desktop\footcite{site:osgd}  è uno strumento sviluppato da Oracle per l'accesso sicuro alle macchine virtuali da remoto.\\
+Nel contesto aziendale viene utilizzato per centralizzare la definizione dei permessi di accesso alla flotta dei server del \gls{datacenter} privato. 
+\subsection{Ambienti di sviluppo}
