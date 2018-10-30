@@ -23,5 +23,9 @@ Per la parte frontend dei vari prodotti, Infocert ha sviluppato un \gls{framewor
 Gli operatori non hanno distinzioni interne e utilizzano Puppet per la configurazione delle macchine e Java e/o Python per la realizzazione dei test d'accettazione e sviluppo delle sonde di monitoraggio. \\
 Le sonde di monitoraggio sono piccoli applicativi che verificano lo stato dei server nei vari ambienti d'esecuzione; in caso di macchine non operative avvisano i relativi responsabili.
 \subsubsection{Puppet}
-Puppet è uno strumento di \gls{cfg-mgmt}
+Puppet è uno strumento di \gls{cfg-mgmt} che permette di definire lo stato delle macchine tramite un linguaggio dichiarativo dedicato, garantendo il versionamento dell'infrastruttura e la replica delle configurazioni su più macchine con il minimo sforzo. \\
+Operando le modifiche ai server esclusivamente tramite Puppet è infatti possibile mantenere consistente lo stato dell'infrastruttura, rendendo più rapida la propagazione delle modifiche in flotte composte da molti server. \\
+Un altro punto di forza di Puppet è quello di definire delle classi tramite il linguaggio proprietario dell'applicativo, permettendo ai meno esperti di utilizzarle senza conoscerne l'implementazione interna (proprio come una classe vera e propria, con metodi privati e pubblici) e rendendo più accessibile la gestione della configurazione. Queste classi infatti possono essere configurate tramite file YAML, rendendone possibile l'utilizzo anche a chi non è formato per utilizzare il linguaggio interno di Puppet.
 \subsubsection{Python}
+Python è un linguaggio di programmazione non tipizzato che da tempo sta conquistando sempre più aree dello sviluppo software. Grazie alla sua bassa curva d'apprendimento e alle innumerevoli librerie open-source presenti sul mercato, risulta la scelta ideale per molte soluzioni software, tra le quali troviamo le utility di scripting, il calcolo distribuito, il data mining e lo sviluppo dei test di sistema. \\
+La forza di python sta nel permettere la realizzazione di compiti complessi tramite la scrittura poche righe di codice, mantenendo alta la leggibilità dello stesso. \\
