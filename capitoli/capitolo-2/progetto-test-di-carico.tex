@@ -2,9 +2,29 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
 \subsection{Descrizione}
+%BIB:https://www.guru99.com/performance-testing.html
+Il progetto Test di Carico, nella sua accezione più semplice, si traduce in un effettivo caso di studio dello stato dell'arte del mondo del \textbf{Performance Testing}. \\
+Questo processo è una categoria di test di sistema essenziale per applicazioni esposte a grandi flussi di utenza e con vincoli di qualità stringenti riguardanti le performance del sistema. Lo scopo finale di questi test è infatti quello di misurare le prestazioni di un applicativo a svariati livelli di utilizzo permettendo di determinarne eventuali pregi e difetti, e attestare la qualità del software prima del rilascio. \\
+Applicativi rilasciati senza includere i Performance Test nella fase di validazione spesso presentano problemi di reattività, peggiorando l'esperienza dell'utente e causando cattiva reputazione del servizio. \\
+Esistono svariate declinazioni dei performance test, tutte concentrate sui vari aspetti dei possibili problemi di prestazioni e incentrate su determinati tipi di metrica. \\
+Lo stage si è concentrato su due particolari categorie di questi test, i \textbf{Test di carico} e gli \textbf{Stress Test}.
+\subsubsection{Test di carico}
+%BIB:https://www.guru99.com/load-testing-tutorial.html
+I test di carico si concentrano sul verificare le abilità del sistema a rispondere a flussi di carico predeterminati, ricavati da aspettative di popolarità che l'applicativo dovrà sostenere. In questo particolare tipo di test infatti si applica il traffico desiderato al sistema, verificando che i tempi di risposta (e quindi l'esperienza utente) siano coerenti con i valori indicati negli \gls{sla}. \\
+Dai risultati prodotti da questo test si deduce se l'infrastruttura a supporto dell'applicativo sia adeguata a sostenere il flusso d'utenza che gli studi di mercato predicono.
+\subsubsection{Stress Test}
+%BIB:https://www.guru99.com/stress-testing-tutorial.html
+Gli stress test tendono invece ad individuare il limite superiore delle performance di un sistema, verificando la robustezza di un applicativo all'insorgere di flussi d'utenza non previsti inizialmente. \\
+Questo processo quindi viene fatto aumentando gradualmente le richieste al sistema fino all'insorgere di risposte non previste per arrivare eventualmente alla rottura del sistema, ovvero quando il software smette completamente di rispondere. \\\\\\\\
+La prima parte dello studio si è quindi concentrata sulla ricerca delle soluzioni software presenti sul mercato che permettano di simulare il comportamento di un grande flusso di utenti, software racchiusi nella categoria dei \textbf{Load testing tools}. \\
+Essendo Legalmail un prodotto enterprise il traffico d'utenza usuale è molto alto, richiedendo un grande sforzo computazionale per simularne il volume; per questo la seconda parte dello studio è stata rivolta all'analisi delle soluzioni nel cloud che permettano la simulazione di questi carichi in caso l'infrastruttura interna dell'azienda non ne fosse in grado. \\
+Una volta ottenute le basi teoriche sopraelencate si sarebbe progettata ed implementata un'infrastruttura che permettesse l'esecuzione di questi test in modo \textit{semplice}, \textit{flessibile}, \textit{ripetibile}, ed \textit{automatizzabile}.
 \subsection{Obiettivi}
 \subsection{Pianificazione Temporale}
-\subsection{Risultati Attesi}
+\subsection{Prodotti Attesi}
 \subsection{Vincoli Metodologici}
+La realizzazione dello studio e la progettazione dell'infrastruttura non hanno subito limitazioni durante il loro svolgimento, ogni obiettivo è stato perseguito in piena libertà, ponendo come unico obbligo la documentazione adeguata di ogni scelta progettuale e metodologica effettuata. \\
+L'azienda ha inoltre posto forte attenzione sulla mia partecipazione agli eventi SCRUM affrontati nel periodo di stage, in modo da ampliare la mia formazione sulle metodologie Agile.
 \subsection{Vincoli Tecnologici}
-\section{Interessi Aziendali}
+L'azienda non ha imposto veri e propri vincoli sulle tecnologie da utilizzare per portare a termine gli obiettivi. Tuttavia, sia per la parte infrastrutturale che per quella applicativa, sarebbe stato preferibile proporre una soluzione che utilizzasse linguaggi di programmazione già adottate all'interno del team Legalmail, in modo da abbattere l'eventuale \gls{debito-tecnico} d'ingresso. \\
+Eventuali prodotti che interagissero con l'infrastruttura esistente avrebbero comunque dovuto rispettare i vincoli tecnologici della stessa. 
