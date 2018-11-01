@@ -18,10 +18,64 @@ Gli stress test tendono invece ad individuare il limite superiore delle performa
 Questo processo quindi viene fatto aumentando gradualmente le richieste al sistema fino all'insorgere di risposte non previste per arrivare eventualmente alla rottura del sistema, ovvero quando il software smette completamente di rispondere. \\\\\\\\
 La prima parte dello studio si è quindi concentrata sulla ricerca delle soluzioni software presenti sul mercato che permettano di simulare il comportamento di un grande flusso di utenti, software racchiusi nella categoria dei \textbf{Load testing tools}. \\
 Essendo Legalmail un prodotto enterprise il traffico d'utenza usuale è molto alto, richiedendo un grande sforzo computazionale per simularne il volume; per questo la seconda parte dello studio è stata rivolta all'analisi delle soluzioni nel cloud che permettano la simulazione di questi carichi in caso l'infrastruttura interna dell'azienda non ne fosse in grado. \\
-Una volta ottenute le basi teoriche sopraelencate si sarebbe progettata ed implementata un'infrastruttura che permettesse l'esecuzione di questi test in modo \textit{semplice}, \textit{flessibile}, \textit{ripetibile}, ed \textit{automatizzabile}.
+Una volta ottenute le basi teoriche sopraelencate si sarebbe progettata ed implementata un'infrastruttura che permettesse l'esecuzione di questi test in modo \textit{semplice}, \textit{flessibile}, \textit{ripetibile}, ed \textit{automatizzabile}.\\
+Per un'efficacie realizzazione dei test di performance non è sufficiente l'implementazione dell'infrastruttura per l'esecuzione dei test, ma si necessita di strumenti di monitoraggio delle macchine target e ingegnerizzazione della reportistica. Tuttavia, essendo il tempo di tirocinio limitato, lo scopo ultimo dello stage è quello di creare una solida base per l'esecuzione di questi test, in modo da essere estensibile per eventuali sviluppi futuri.
+
+
 \subsection{Obiettivi}
+A seguito delle necessità descritte nella sezione precedente, assieme al tutor aziendale sono stati definiti gli obiettivi da portare a termine per considerare il tirocinio riuscito. \\
+Questi sono stati divisi in due categorie così descritte:
+\begin{itemize}
+	\item \textit{MIN}: requisiti minimi, vincolanti in quanto obiettivo primario richiesto dal committente;
+	\item \textit{MAX}: requisiti massimi (comprendenti quelli desiderabili e opzionali), non vincolanti o strettamente necessari, ma dal riconoscibile valore aggiunto;
+	\item \textit{FOR}: obiettivi formativi, rappresentanti valore aggiunto non strettamente competitivo.
+\end{itemize}
+Le sigle precedentemente indicate saranno seguite da una coppia sequenziale di numeri, identificativo del requisito.\\\\
+Gli obiettivi fissati sono dunque:
+\begin{itemize}
+	\item \textbf{Minimi}
+	\begin{itemize}
+		\item \underline{\textit{MIN01}}: Individuazione degli strumenti idonei agli obiettivi dello stage (strumenti di load test, soluzioni cloud);
+		\item \underline{\textit{MIN02}}: Realizzazione infrastruttura di sviluppo per test di carico;
+		\item \underline{\textit{MIN03}}: Installazione suite test di carico con relativi casi di test;
+		\item \underline{\textit{MIN04}}: Documentazione di Progettazione e Sviluppo dei componenti menzionati nei punti precedenti;
+	\end{itemize}
+	\item \textbf{Massimi}
+	\begin{itemize}
+		\item \underline{\textit{MAX01}}: Realizzazione infrastruttura di test e accettazione;
+		\item \underline{\textit{MAX02}}: Esecuzione test di carico su infrastruttura di accettazione;
+		\item \underline{\textit{MAX03}}: Risultati dei test di carico in ambiente di accettazione; 
+	\end{itemize}
+	\item \textbf{Formativi}
+	\begin{itemize}
+		\item \underline{\textit{FOR01}}: Collegato a \textit{MIN01}. Acquisizione teorica dei principi dei test di carico e gestione delle infrastrutture;
+		\item \underline{\textit{FOR02}}: Collegato a \textit{MIN02}. Acquisizione pratica di strumenti per la gestione delle infrastrutture;
+		\item \underline{\textit{FOR03}}: Collegato a \textit{MIN03}. Acquisizione pratica sull'utilizzo di uno strumento dei test di carico;
+		\item \underline{\textit{FOR04}}: Utilizzo della metodologia agile in ambito aziendale;		
+	\end{itemize}
+\end{itemize}
 \subsection{Pianificazione Temporale}
+La pianificazione temporale segue la durata degli Sprint aziendali, ovvero due settimane. Alla fine di ognuno viene collegata una \textit{milestone}, alla quale sono associati quelli che si ritiene saranno i traguardi raggiunti entro ogni corrispondente scadenza.
+Le milestone fissate sono le seguenti:
+\begin{itemize}
+	\item \underline{\textit{M1}}: Fine primo sprint, analisi di strumenti per test di carico e reportistica, selezione infrastruttura;
+	\item \underline{\textit{M2}}: Fine secondo sprint, predisposizione ambiente di sviluppo con relativa installazione dei tools oggetto di stage;
+	\item \underline{\textit{M3}}: Fine terzo sprint, predisposizione e dimensionamento ambienti di test, accettazione;
+	\item \underline{\textit{M4}}: Fine quarto sprint, predisposizione e dimensionamento ambiente di produzione, primo test di carico in ambiente di accettazione;
+	\item \underline{\textit{M5}}: Fine quarto sprint, documentazione infrastruttura, test di carico, analisi risultati e report finale con presentazione della piattaforma al team.
+\end{itemize}
 \subsection{Prodotti Attesi}
+A seguito degli obiettivi fissati sono stati definiti dei prodotti che potessero attestare il soddisfacimento dei requisiti:
+\begin{enumerate}
+	\item Definizione infrastruttura per gli ambienti di sviluppo, test, accettazione e produzione.\\ 
+	Ciascun ambiente sarà composto da:
+	\begin{itemize}
+		\item Strumenti per l'esecuzione di test di carico;
+		\item Suite di test.
+	\end{itemize}
+	\item Documentazione del lavoro svolto per per permetterne la replica e l'estensione.
+\end{enumerate}
+
 \subsection{Vincoli Metodologici}
 La realizzazione dello studio e la progettazione dell'infrastruttura non hanno subito limitazioni durante il loro svolgimento, ogni obiettivo è stato perseguito in piena libertà, ponendo come unico obbligo la documentazione adeguata di ogni scelta progettuale e metodologica effettuata. \\
 L'azienda ha inoltre posto forte attenzione sulla mia partecipazione agli eventi SCRUM affrontati nel periodo di stage, in modo da ampliare la mia formazione sulle metodologie Agile.
