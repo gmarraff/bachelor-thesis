@@ -1,0 +1,25 @@
+% !TEX encoding = UTF-8
+% !TEX TS-program = pdflatex
+% !TEX root = ../../tesi.tex
+\subsection{Obiettivi}
+In questa sezione viene analizzato il cuore dell'intero studio: lo strumento dei test di carico. In particolare, dopo diverse discussioni con il tutor aziendale sono emerse le caratteristiche principali che il software avrebbe dovuto dimostrare (in ordine di importanza):
+\begin{enumerate}
+	\item \textbf{Vitalità}: un requisito fondamentale era che il software fosse vivo: ampliato e manutenuto costantemente.\\ Potenzialmente i test di carico diventeranno un elemento cruciale della certificazione della qualità dei prodotti aziendali, la scoperta di bug molto gravi all'interno dello strumento di test di carico non può essere ignorata, un team di sviluppo attivo si opererebbe al più presto per correggere il difetto;
+	\item \textbf{Open Source}: un requisito che si collega al precedente: eventuali bug potrebbero essere risolti dai team di sviluppo aziendali se il software utilizzato fosse condiviso, inoltre eventuali personalizzazioni interne potrebbero migliorarne l'uso;
+	\item \textbf{Maturità}: anche questa caratteristica si collega alle precedenti: avviare progetti usando software giovani o non ancora consolidati potrebbe rivelarsi controproducente in caso di abbandono del progetto o della presenza di bug strutturali;
+	\item \textbf{Potenza}: l'applicativo Legalmail regge picchi di 500/600 mila visitatori giornalieri, lo strumento adottato dovrà poter simularne la quantità: performance adeguate e predisposizione ad essere eseguito in ambiente distribuito sono caratteristiche essenziali;
+	\item \textbf{Versatilità}: per eseguire dei validi test di carico è necessario simulare il comportamento dell'utente in fase di navigazione, inoltre Legalmail è composto da più servizi che non sono esposti solo tramite HTTP: la possibilità di testare anche protocolli diversi e la simulazione di complessi scenari di navigazione diventano necessari.
+	\item \textbf{Esaustività}: i report prodotti dal software devono essere validi: i risultati dei testi di carico possono avere valenza di certificazione per i clienti. Inoltre i report devono poter essere esportabili in modo da essere elaborati come un documento ufficiale;
+	\item \textbf{Versionamento}: gli scenari di test elaborati dal software dovrebbero poter essere scritti con linguaggi di scripting, preferibilmente già adottati in azienda, in modo da favorirne il riuso e permetterne il versionamento tramite \gls{version-control};
+	\item \textbf{Integrazione Continua}: caratteristica desiderabile: se il software è già predisposto per l'integrazione con strumenti di Continuous Integration sarà più facile introdurlo nel sistema aziendale;
+	\item \textbf{Prezzo}: più un requisito preferenziale: l'adozione del software non deve avere costi proibitivi.
+\end{enumerate}
+\subsection{Strumenti Visionati}
+Sebbene questi strumenti sono sempre più diffusi, non c'è ancora molta letteratura a riguardo si cui studiare sopra. Molti articoli inoltre sono scritti dagli stessi produttori del software, necessitando una certa cautela durante la lettura per evitare di "farsi vendere il vino dall'oste".\\
+Tutti gli articoli visionati per l'analisi degli strumenti sono citati all'interno della bibliografia, nella sezione \textit{Analisi degli strumenti di test di carico}.
+\input{capitoli/capitolo-3/strumenti-visionati}
+
+\subsection{Tabella di comparazione funzionalità}
+\subsection{Valutazioni intermedie}
+\subsection{Prova dei possibili candidati}
+\subsection{Valutazioni Finali}
