@@ -27,14 +27,43 @@ La soluzione ideale sarebbe rappresentata dalla fusione delle caratteristiche pr
 \textbf{The Grinder} è un prodotto solido, ma la scarsa vitalità lo rende inadatto agli scopi aziendali.
 \textbf{Locust} è un altro prodotto degno di nota ma le opinioni contrastanti trovate sul suo conto non hanno convinto i referenti aziendali ad approfondirne le caratteristiche. \\
 In ultimo troviamo \textbf{Artillery}, \textbf{Vegeta} e \textbf{Siege} che, sebbene con caratteristiche differenti, sono accomunati dalla scarsa maturità, rendendoli inadeguati alle aspettative aziendali.
+\newpage
 \subsection{Prova dei possibili candidati}
-I quattro candidati più promettenti sono poi stati sottoposti ad un ulteriore step di valutazione: installazione e lancio di un test in modalità distribuita. Questa fase ha permesso di capire meglio i pro e i contro dei vari strumenti, suddividendo le caratteristiche analizzate in 4 categorie:
+I quattro candidati più promettenti sono poi stati sottoposti ad un ulteriore step di valutazione: installazione e lancio di un test in modalità distribuita. Questa fase ha permesso di capire meglio i pro e i contro (dal punto di vista aziendale) dei vari strumenti, suddividendo le caratteristiche analizzate in 4 categorie:
 \begin{itemize}
 	\item \textbf{Configurazione}: la modalità di stesura degli scenari di test e la loro successiva manutenzione;
 	\item \textbf{Load Generation}: la modalità in cui viene generato il carico: aperta (open), quando si fissa un numero di richieste per secondo e il software le genera indipendentemente dal termine della richiesta; chiusa (closed) quando il software simula un numero indicato di utenti che effettua nuove richieste unicamente al termine delle richieste precedenti;
-	\item \textbf{Cluster Mode}: ;
-	\item \textbf{Documentazione}:.
+	\item \textbf{Cluster Mode}: la facilità dell'impostazione della modalità di esecuzione distribuita;
+	\item \textbf{Documentazione}: la bontà della documentazione trovata, inclusa l'attività della community, per scrivere ed eseguire il test.
 \end{itemize}
+Lo scenario di test rappresentato simula una semplice navigazione di quattro pagine di un sito web.\\
+\newpage
+\begin{table}[H]
+\def\arraystretch{2}
+\begin{center}
+	\begin{tabular}{|c|c|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+		\hline
+		\textbf{Strumento} & & \textbf{Configurazione} & \textbf{Load Generation} & \textbf{Cluster Mode} & \textbf{Documentazione}\\ \hline
+		
+		\textbf{JMeter} & PRO & -Recording del browser semplice & -Open/Closed\newline-Facile da configurare & -\gls{out-of-the-box} & -Community Attiva \newline -Estesa documentazione\newline-Abbondanza di tutorial \\ \hline
+		%%%%%%%%%%%%%%%%%%%
+		& CON & -Interfaccia grafica a primo impatto complessa \newline -XML oneroso da modificare a mano & & -Eventuali file di input devono essere caricati sulle macchine del cluster a mano &  \\ \hline\hline
+		
+		\textbf{Tsung} & PRO & -\gls{dsl} Espressivo \newline-Recording del browser semplice & -Facile da configurare & -\gls{out-of-the-box} & -Documentazione chiara e completa \\ \hline
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		& CON & -Scenari particolari richiedono l'uso di Erlang\newline -XML oneroso da modificare a mano & -Solo Open & -Definzione del cluster da XML e non da parametri & -Community non molto attiva  \\ \hline\hline
+		
+		\textbf{Gatling} & PRO & -\gls{dsl} Facile ed espressivo \newline-Recording del browser semplice\newline-Facile da modularizzare & -Open/Closed  \newline -Facile da configurare \newline -Molto personalizzabile &  & -Buona documentazione \newline-Community Attiva-\newline-Molti tutorial \\ \hline
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		& CON & -Scenari particolari potrebbero richiedere la conoscenza di Scala &  & -Non \gls{out-of-the-box}: necessita di script ad hoc per funzonare &   \\ \hline\hline
+		
+		\textbf{K6} & PRO & -Supporta tutta l'interprete Javascript \newline-Recording del browser semplice\newline-Facile da modularizzare & -Facile da configurare\newline-Permette la configurazione tramite files JSON &  & -Documentazione chiara e completa \\ \hline
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		& CON & -Scenari lunghi possono generare file scarsamente leggibili se non strutturati con criterio & -Solo Open & -Non \gls{out-of-the-box}: necessita di script ad hoc per funzionare & -Community ancora di nicchia   \\ \hline\hline
+	\end{tabular}
+\end{center}
+\caption{Pro e Contro strumenti installati}
+\end{table}
 \subsection{Valutazioni Finali}
 La prova dei candidati ha mostrato due fazioni ben distinte: da un lato K6 e Gatling: tool moderni e funzionali con il design progettato per soddisfare le esigenze degli sviluppatori; dall'altra JMeter e Tsung: strumenti più robusti e versatili ma con un'usabilità più vicina al mondo del \gls{qa}. \\
 Tuttavia, la mancanza di un sistema d'esecuzione distribuita \gls{out-of-the-box} dei primi due si è rivelata una pecca piuttosto grave, ricordando come la \textit{potenza}, intesa come capacità di carico generato, sia un'elemento chiave di questa ricerca e una caratteristica necessaria per gli strumenti in esame. \\
