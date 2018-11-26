@@ -19,10 +19,22 @@ Sebbene questi strumenti sono sempre più diffusi, non c'è ancora molta lettera
 Tutti gli articoli visionati per l'analisi degli strumenti sono citati all'interno della bibliografia, nella sezione \textit{Analisi degli strumenti di test di carico}.\\
 Tutti gli strumenti visionati sono \textit{Open Source} e, salvo diversamente indicato, sono manutenuti in modo frequente.
 \input{capitoli/capitolo-3/strumenti-visionati}
-
-\subsection{Tabella di comparazione funzionalità}
 \subsection{Valutazioni intermedie}
+Gli strumenti descritti in precedenza, sono solo una parte di quelli presenti sul mercato, tuttavia dati i limiti di tempo non era possibile analizzarli tutti. \\
+Di quelli analizzati, tuttavia, i candidati più vicini alle caratteristiche richieste sono risultati essere: \textbf{JMeter}, \textbf{Tsung}, \textbf{Gatling} e \textbf{K6}: i primi due per la maturità, versatilità e robustezza dimostrati negli anni; i secondi, di più recente fattura, per il loro design più moderno e per maggiore vicinanza alle pratiche \gls{devops}.
+La soluzione ideale sarebbe rappresentata dalla fusione delle caratteristiche principali degli strumenti citati, idea che trova modo di esprimersi attraverso \textbf{Taurus}, che, esponendo JMeter tramite un interfaccia molto semplice avvicinandolo alle pratiche \gls{devops}, ingloba tutte le caratteristiche ricercate da questo studio. Tuttavia, l'elevato prezzo di sottoscrizione ne rende proibitiva l'adozione. \\
+\textbf{Wrk}, \textbf{Apachebench} e \textbf{Bees with machine guns} potrebbero essere integrati per realizzare gli stress test, considierata la facilita con la quale permettono di generare un grosso carico, tuttavia, una buona conoscenza dei tool citati in precedenza può portare agli stessi risultati evitando l'apprendimento di altri strumenti. \\
+\textbf{The Grinder} è un prodotto solido, ma la scarsa vitalità lo rende inadatto agli scopi aziendali.
+\textbf{Locust} è un altro prodotto degno di nota ma le opinioni contrastanti trovate sul suo conto non hanno convinto i referenti aziendali ad approfondirne le caratteristiche. \\
+In ultimo troviamo \textbf{Artillery}, \textbf{Vegeta} e \textbf{Siege} che, sebbene con caratteristiche differenti, sono accomunati dalla scarsa maturità, rendendoli inadeguati alle aspettative aziendali.
 \subsection{Prova dei possibili candidati}
+I quattro candidati più promettenti sono poi stati sottoposti ad un ulteriore step di valutazione: installazione e lancio di un test in modalità distribuita. Questa fase ha permesso di capire meglio i pro e i contro dei vari strumenti, suddividendo le caratteristiche analizzate in 4 categorie:
+\begin{itemize}
+	\item \textbf{Configurazione}: la modalità di stesura degli scenari di test e la loro successiva manutenzione;
+	\item \textbf{Load Generation}: la modalità in cui viene generato il carico: aperta (open), quando si fissa un numero di richieste per secondo e il software le genera indipendentemente dal termine della richiesta; chiusa (closed) quando il software simula un numero indicato di utenti che effettua nuove richieste unicamente al termine delle richieste precedenti;
+	\item \textbf{Cluster Mode}: ;
+	\item \textbf{Documentazione}:.
+\end{itemize}
 \subsection{Valutazioni Finali}
 La prova dei candidati ha mostrato due fazioni ben distinte: da un lato K6 e Gatling: tool moderni e funzionali con il design progettato per soddisfare le esigenze degli sviluppatori; dall'altra JMeter e Tsung: strumenti più robusti e versatili ma con un'usabilità più vicina al mondo del \gls{qa}. \\
 Tuttavia, la mancanza di un sistema d'esecuzione distribuita \gls{out-of-the-box} dei primi due si è rivelata una pecca piuttosto grave, ricordando come la \textit{potenza}, intesa come capacità di carico generato, sia un'elemento chiave di questa ricerca e una caratteristica necessaria per gli strumenti in esame. \\
