@@ -1,0 +1,14 @@
+1)ftp://ftp.dante.de/tex-archive/biblio/biber/documentation/biber.pdf controllare la compatibilità di biber-biblatex
+2)Installare l'ultima versione di perl
+3)Scaricare il sorgente del biber richiesto (https://github.com/plk/biber/releases)
+4)Nella cartella di biber:
+	- sudo PATHTOPERL/cpan Log::Log4perl
+	- sudo PATHTOPERL/cpan Module::Build
+	- sudo PATHTOPERL/perl Build.PL
+	- sudo ./Build installdeps
+	- sudo PATHTOPERL/perl Build.PL
+	- sudo PATHTOPERL/perl Build install
+	- ./bin/biber -v (verifica che sia tutto ok)
+5)Texstudio Opzioni -> Comandi -> Biber (mettere il path dove si è scaricato il software)
+6)Texstudio Opzioni -> Compila -> Strumento predefinito compilazione bibliografia (selezionare Biber)
+7) F8, F5 e il gioco è fatto
