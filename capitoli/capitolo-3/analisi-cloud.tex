@@ -1,8 +1,28 @@
 % !TEX encoding = UTF-8
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
+Dopo aver selezionato lo strumento di test di carico adatto per la realizzazione dei test è stato svolto uno studio per capire come rendere semplice ed immediata l'istanziazione dell'infrastruttura per eseguirlo in modalità distribuita. In pratica servivano strumenti e procedure per automatizzare l'approvvigionamento dei server sulla quale eseguire i test di carico.
 \subsection{Obiettivi}
+Gli obiettivi dello studio possono riassumersi nel trovare una procedura di approvvigionamento dell'infrastruttura che fosse:
+\begin{itemize}
+	\item \textbf{Funzionale}: pronta ad eseguire i test di carico tramite JMeter;
+	\item \textbf{Automatica}: la configurazione dei server e l'esecuzione dei test doveva ridurre al minimo le iterazioni dell'utente;
+	\item \textbf{Flessibile}: la modifica della configurazione doveva avvenire tramite parametri;
+	\item \textbf{Economica}: i costi finanziari di approvvigionamento dovevano essere ridotti al minimo;
+	\item \textbf{Adattabile}: predisposta ad essere, eventualmente, integrata con i tool aziendali come Jenkins e Puppet.
+\end{itemize}
 \subsection{Infrastructure as Code}
+Prima di vagliare le soluzioni presenti sul mercato è stato svolto uno studio teorico sul mondo del \gls{cloud}, per permetterne una migliore comprensione dei concetti e della terminologia che lo definiscono. \\
+Questo studio, adattato agli obiettivi sopraelencati, è confluito nell'Infrastructure as Code (IaC)\footcite{article:iac}: un'approccio che sta alla base della filosofia \gls{devops} e che consiste nel gestire l'infrastruttura aziendale come se fosse un prodotto software: definita tramite codice versionato, testato e aderente a tutte le altre pratiche comuni allo sviluppo software. \\
+L'IaC, nel contesto della gestione di server atti a ospitare applicativi, si compone di quattro grandi macro fasi/componenti così definite\footcite{article:iac-components}:
+\begin{enumerate}
+	\item \textbf{Provisioning}: atta a creare ed avviare le macchine fisiche e/o virtuali, conferendogli le risorse necessarie (CPU, RAM, Hard-disk, etc.);
+	\item \textbf{Configuration Managment}: atta gestire e mantenere le configurazioni necessarie per ospitare l'applicativo: software, credenziali, impostazioni di sistema, etc.;
+	\item \textbf{Deployment}: atta a distribuire l'applicativo sulle macchine istanziate, gestendone le versioni e i rollback: ripristino della versione precedente in caso di errori;
+	\item \textbf{Orchestration}: atta a orchestrare tutte le varie fasi elencate in precedenza, definendo ordine, modalità d'esecuzione e tutte le configurazioni necessarie in modo da rendere più agile la gestione di infrastrutture molto grandi.
+\end{enumerate}
+Va detto che non sono misse ma possono unirsi
+tutto ciò nel contesto dei disposable server
 \subsection{Cloud Platform}
 \subsection{Provisioner}
 \subsection{Orchestrator}
