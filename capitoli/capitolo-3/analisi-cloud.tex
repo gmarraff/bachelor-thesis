@@ -80,4 +80,10 @@ La scelta quindi si è spostata verso una soluzione ad hoc, sviluppata intername
 	\item Progettazione di una utility in Python focalizzata sull'estensibilità, in modo da poter adattare l'esecuzione dei test di carico in caso di necessità future.
 \end{itemize}
 \subsection{Soluzione proposta}
-Al termine dell'analisi la soluzione proposta è stata la progettazione di un orchestratore in Python, che sfruttasse Terraform e Puppet per l'approvvigionamento e configurazione dell'infrastruttura, eseguisse i test di carico, consumasse i dati in una maniera concordata e infine sfruttasse Terrafom per distruggere l'infrastruttura appena creata.
+Al termine dell'analisi la soluzione proposta è stata la progettazione di un orchestratore in Python, che sfruttasse Terraform e Puppet per l'approvvigionamento e configurazione dell'infrastruttura (Cluster), eseguisse i test di carico, consumasse i dati in una maniera concordata e infine sfruttasse Terrafom per distruggere l'infrastruttura appena creata.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=13cm]{immagini/soluzione}
+	\caption{Visione ad alto livello della soluzione proposta}
+	\label{img-soluzione}
+\end{figure}
