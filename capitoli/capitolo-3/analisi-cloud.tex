@@ -43,13 +43,14 @@ Questi strumenti sono stati valutati su quattro diversi aspetti:
 \end{itemize}
 
 \begin{table}[H]
+\def\arraystretch{1.5}
 \begin{center}
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
 		\multicolumn{1}{|c|}{\textbf{Strumento}}                                  & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Piattaforme\\ Supportate\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Configurazione}}                        & \multicolumn{1}{c|}{\textbf{Modifiche}} & \multicolumn{1}{c|}{\textbf{Esecuzione}} \\\hline
-		\begin{tabular}[c]{@{}l@{}}AWS\\ Cloud \\ \\ Formation\end{tabular}     & AWS                                                                                           & Dichiarativa                                                       & Automatiche                            & GUI/CLI                                 \\\hline
-		\begin{tabular}[c]{@{}l@{}}GCP \\ \\ Deployment\\  Manager\end{tabular} & GCP                                                                                           & Dichiarativa                                                       & Manuali                                & CLI                                     \\\hline
-		Terraform                                                               & \begin{tabular}[c]{@{}l@{}}AWS/GCP/MA \\ \\ e molti altri\end{tabular}                        & Dichiarativa                                                       & Automatiche                            & CLI                                     \\\hline
+		\begin{tabular}[c]{@{}l@{}}AWS\\ Cloud \\ Formation\end{tabular}     & AWS                                                                                           & Dichiarativa                                                       & Automatiche                            & GUI/CLI                                 \\\hline
+		\begin{tabular}[c]{@{}l@{}}GCP \\  Deployment\\  Manager\end{tabular} & GCP                                                                                           & Dichiarativa                                                       & Manuali                                & CLI                                     \\\hline
+		Terraform                                                               & \begin{tabular}[c]{@{}l@{}}AWS/GCP/MA \\ e molti altri\end{tabular}                        & Dichiarativa                                                       & Automatiche                            & CLI                                     \\\hline
 		Ansible                                                                 & \begin{tabular}[c]{@{}l@{}}AWS/GCP/MA\\ e molti altri\end{tabular}                            & \begin{tabular}[c]{@{}l@{}}Dichiarativa/\\ Imperativa\end{tabular} & Manuali                                & GUI/CLI \\\hline                            
 	\end{tabular}
 \caption{Tabella comparativa strumenti di provisioning}
@@ -70,5 +71,13 @@ La gestione della configurazione all'interno dell'azienda è effettuata tramite 
 \subsection{Deployment}
 All'interno dell'azienda la fase di deploy viene gestita direttamente da Puppet.
 \subsection{Orchestrator}
-No docker/kubernetes, jmeter != microservizi
+Per la scelta dell'orchestratore sono stati accantonati preventivamente prodotti come Kubernetes\footcite{site:kubernetes}, Nomad\footcite{site:nomad} e simili, questi infatti, oltre a richiedere l'utilizzo di \gls{container-system} come Docker\footcite{site:docker} o Packer\footcite{site:packer}, sono orientati per architetture a 	\gls{microservizi}, dove più componenti differenti comunicano tra di loro. L'esecuzione dei test di carico avviene invece tramite un solo servizio, JMeter, che viene replicato su più server. \\
+La scelta quindi si è spostata verso una soluzione ad hoc, sviluppata internamente, integrabile con diversi approcci:
+\begin{itemize}
+	\item Scrittura di uno script bash parametrizzabile;
+	\item Sviluppo di un \gls{plugin} per Jenkins;
+	\item Stesura di una guida su Confluence per eseguire le varie fasi in modo manuale;
+	\item Progettazione di una utility in Python focalizzata sull'estensibilità, in modo da poter adattare l'esecuzione dei test di carico in caso di necessità future.
+\end{itemize}
 \subsection{Soluzione proposta}
+Al termine dell'analisi la soluzione proposta è stata la progettazione di un orchestratore in Python, che sfruttasse Terraform e Puppet per l'approvvigionamento e configurazione dell'infrastruttura, eseguisse i test di carico, consumasse i dati in una maniera concordata e infine sfruttasse Terrafom per distruggere l'infrastruttura appena creata.
