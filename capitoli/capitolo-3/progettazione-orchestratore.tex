@@ -3,24 +3,31 @@
 % !TEX root = ../../tesi.tex
 \subsection{JMeter - Modalità Distribuita}
 Prima di descrivere la progettazione di JMeterOrchestrator, vorrei inizare questa sezione con una panoramica del funzionamento di JMeter in modalità distribuita (cluster mode), in modo da chiarire quali azioni fossero direttamente gestite da JMeter e specificare quali procedure invece sarebbero state prese in carico dall'orchestratore. \\
-JMeter per essere eseguito in cluster mode richiede l'immissione, tramite \gls{cli}, di un comando simile:\\\\
-\texttt{./jmeter -n -t file.jmx -R 127.0.0.1 -l risultati.csv -e -o report}\\\\
-Dove i paramatri hannoi il seguente significato:
+JMeter quando viene eseguito in cluster mode si divide in due entità:
 \begin{itemize}
-	\item \textbf{-n}:;
-	\item \textbf{-t}:;
-	\item \textbf{-R}:;
-	\item \textbf{-l}:;
-	\item \textbf{-e -o}:.
+	\item \textbf{Master}: la macchina, fisica o virtuale, responsabile di coordinare le macchine slave e collezionare i dati da queste prodotti.
+	\item \textbf{Slaves}: le macchine, fisiche o virtuali, responsabili di generare le richieste al server di destinazione, chiamato target.
 \end{itemize}
-Il software assume quindi che remote esistenti e attivi, genera risultati ma non fa nulla \\
-Tuttavia, nonstante distribuisce file, file di dati no \\
-Quindi orch deve gestire l'avvio dei server, la distribuzione dei file e il consumo dei dati
-
-
-Flow di esecuzione di JMeter
-Mancanza di distribuzione dei dati
-Dati creati e lasciati li
+L'esecuzione di JMeter in modalità distribuita avviene con l'immissione, tramite \gls{cli} sulla macchina master, di un comando simile:\\\\
+\texttt{jmeter -n -t file.jmx -R 127.0.0.1 -l risultati.csv -e -o report}\\\\
+Dove i parametri possiedono il seguente significato:
+\begin{itemize}
+	\item \textbf{-n}: non aprire la \gls{gui}, in modo da risparmiare RAM;
+	\item \textbf{-t}: indica il file da utilizzare come test;
+	\item \textbf{-R}: specifica gli indirizzi ip degli slaves da usare per l'esecuzione del test;
+	\item \textbf{-l}: indica dove salvare i risultati;
+	\item \textbf{-e -o}: indica dove generare il report HTML.
+\end{itemize}
+Il master assume quindi che gli slaves esistano e il server RMI, responsabile di ricevere le indicazione dal master, sia attivo e in stato di ricezione. Il master si assume poi la responsabilità di distribuire il file di test agli slaves, ma, eventuali file di dati (utili per specificare le credenziali degli utenti da simulare o altre configurazioni) devono essere caricati sulle macchine slaves a mano.\\
+I file di test, suffissi \textit{jmx}, non solo racchiudono le richieste da effettuare sulla macchina target ma specificano anche la configurazione del carico da applicare, richiedendo una modifica del file di test in caso si voglia aggiustare qualche parametro della Load Generation. \\
+In ultimo i file generati da JMeter vengono semplicemente scritti su disco ma non consumanti in qualsivoglia modo, questa caratteristica non è adatta per la realizzazione dei disposable servers, questi infatti vengono eliminati alla fine dei test, cancellando a loro volta i dati prodotti. \\
+In sostanza quindi JMeter gestisce solo il coordinamento delle macchine slave, mentre sarà compito dell'orchestratore:
+\begin{itemize}
+	\item Assicurarsi che le macchine slave esistano (creandole eventualmente) e che abbiano il server RMI attivo;
+	\item Distribuire eventuali file di dati alle macchine slaves;
+	\item Prevedere una modalità di modifica della configurazione di carico senza richiedere la riscrittura del file \textit{jmx};
+	\item Notificare l'avvenuto termine dei test, consegnando i file di risultati prodotti al team Legalmail via E-Mail.
+\end{itemize}
 \subsection{Principi}
 SOLID\\
 KISS\\
