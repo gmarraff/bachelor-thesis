@@ -29,11 +29,32 @@ In sostanza quindi JMeter gestisce solo il coordinamento delle macchine slave, m
 	\item Notificare l'avvenuto termine dei test, consegnando i file di risultati prodotti al team Legalmail via E-Mail.
 \end{itemize}
 \subsection{Principi}
-SOLID\\
-KISS\\
-DRY
+Per la progettazione e successiva implementazione dell'orchestratore sono stati seguiti dei principi, o best practises, per garantire una solida codebase e una non troppo onerosa manutenzione.
+\subsubsection{SOLID}
+L'acrostico SOLID, descritto da Robert C. "Uncle Bob" Martin\footcite{book:designprinciples} all'inizio degli anni 2000, si riferisce a cinque principi fondamentali dello sviluppo software orientato agli oggetti e sono:
+\begin{enumerate}
+	\item \textbf{Single Responsability Principle (SRP)}: afferma che ogni classe dovrebbe avere una ed una sola responsabilità, interamente incapsulata al suo interno. Questa caratteristica troverà riscontro tramite la realizzazione dei \textbf{components}, come verrà specificato nella sezione successiva;
+	\item \textbf{Open/Closed Principle (OCP)}: afferma che un'entità software dovrebbe essere aperta alle estensioni, ma chiusa alle modifiche. Su questo principio è stata riposta molta attenzione in quanto, come spiegato nella sezione precedente, le possibili evoluzioni del prodotto sarebbero dovute risultare poco onerose da implementare;
+	\item \textbf{Liskov Substitution Principle (LSP)}: afferma che gli oggetti dovrebbero poter essere sostituiti con dei loro sottotipi, senza alterare il comportamento del programma che li utilizza. Questa caratteristica è implementata di default in python, in quanto linguaggio aderente al \gls{duck-typing};
+	\item \textbf{Interface Segregation Principle (ISP)}: afferma che sarebbero preferibili più interfacce specifiche, che una singola generica. Questa principio viene rispettato con la definizione di più interfacce \textbf{actions} seppur strutturalmente simili, come verrà spiegato nelle sezioni successive;
+	\item \textbf{Depedency Inversion Principle (DIP)}: afferma che una classe dovrebbe dipendere dalle astrazioni, non da classi concrete. Come indicato nella struttura del \textbf{Core} dell'orchestratore.
+\end{enumerate} 
+\subsubsection{KISS}
+KISS, acronimo per \textit{Keep It Simple, Stupid}\footcite{article:drykiss}, è un principio che impone di mantenere il codice più semplice possibile. Lo scopo ultimo del codice è infatti quello di essere letto da altri umani: le aziende spendono di più per la manutenzione piuttosto che per sviluppo del software\footcite{article:maintenancesurvey}, quindi gli sviluppatori passano la maggior parte del tempo a sistemare il codice di altri piuttosto che crearne di nuovo.\\
+Durante lo sviluppo dell'orchestratore quindi è stata posta molta attenzione sul \gls{refactor}, cercando di semplificare al minimo la logica di ogni parte del programma.
+\subsubsection{DRY}
+DRY, acronimo di \textit{Don't Repeat Yourself}\footcite{article:drykiss}, è un principio che impone di incapsulare le unità logiche applicative in modo da favorirne il riuso, evitando la ripetizione della stesura di linee di codice. \\
+Ripetere in più parti della codebase la stessa funzionalità logica rende onerosa e complicata la manutenzione: la modifica di un concetto logico richiede la riscrittura di più parti dell'applicativo, rendendo difficile tracciare le modifiche effettuate.\\
+Anche per questo principio è stata quindi posta molta attenzione sul \gls{refactor} in modo da evitare di incappare nell'antipattern WET, \textit{Wasting Everyone's Time}, esatto contrario del principio DRY.
+\subsubsection{Immediately Repair Your Broken Windows}
+Per ultimo, ma non meno importante, troviamo il \textit{Immediately Repair Your Broken Windows}\footcite{article:brokenwindow}, principio che unisce teorie dell'ambito della criminologia all'ingegneria del software. In sostanza questa teoria impone che bug, refusi di cattiva progettazione, violazione di principi di programmazione e problemi di questo tipo vadano corretti nell'immediato momento in cui vengono scoperti, in modo da ridurre al minimo il \gls{debito-tecnico}. \\
+L'adozione di questo principio, oltre ad essere buona pratica in ogni situazione, assume maggiore rilevanza per il progetto di stage: essendo il tempo a disposizione molto limitato, consegnare un prodotto con bug conosciuti e magari non documentati avrebbe incattivito l'opinione sul software sviluppato, diminuendo le possibilità di adozione da parte dell'azienda e mettendo in cattiva luce la mia reputazione professionale. \\
+L'obiettivo del progetto era quindi quello di avere codice, si strutturato e funzionale, ma soprattutto funzionante.
+
 \subsection{Core}
-Remember Dependency Injection
+Core Dependency Injection ->Principi OCP, DIP \\
+Actions Interfaces --> Principio ISP \\
+Components --> Principii DRY, SRP \\
 \subsection{Actions}
 \subsection{Command Line Interface}
 \subsection{Enterprise Edition}
