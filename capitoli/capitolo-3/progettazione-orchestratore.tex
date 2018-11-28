@@ -1,7 +1,26 @@
 % !TEX encoding = UTF-8
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
-\subsection{JMeter - Pregi e difetti}
+\subsection{JMeter - Modalità Distribuita}
+Prima di descrivere la progettazione di JMeterOrchestrator, vorrei inizare questa sezione con una panoramica del funzionamento di JMeter in modalità distribuita (cluster mode), in modo da chiarire quali azioni fossero direttamente gestite da JMeter e specificare quali procedure invece sarebbero state prese in carico dall'orchestratore. \\
+JMeter per essere eseguito in cluster mode richiede l'immissione, tramite \gls{cli}, di un comando simile:\\\\
+\texttt{./jmeter -n -t file.jmx -R 127.0.0.1 -l risultati.csv -e -o report}\\\\
+Dove i paramatri hannoi il seguente significato:
+\begin{itemize}
+	\item \textbf{-n}:;
+	\item \textbf{-t}:;
+	\item \textbf{-R}:;
+	\item \textbf{-l}:;
+	\item \textbf{-e -o}:.
+\end{itemize}
+Il software assume quindi che remote esistenti e attivi, genera risultati ma non fa nulla \\
+Tuttavia, nonstante distribuisce file, file di dati no \\
+Quindi orch deve gestire l'avvio dei server, la distribuzione dei file e il consumo dei dati
+
+
+Flow di esecuzione di JMeter
+Mancanza di distribuzione dei dati
+Dati creati e lasciati li
 \subsection{Principi}
 SOLID\\
 KISS\\
