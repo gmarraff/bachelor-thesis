@@ -5,12 +5,25 @@
 Per la gestione degli errori sono stati implementati 3 \textit{catchers}:
 \begin{itemize}
 	\item \textbf{StandardCatcher}: propaga l'errore senza catturarlo, utile per relegare la gestione dell'errore all'entità software che sta utilizzando JMeterOrchestrator;
-	\item \textbf{CliCatcher}: Stampa l'errore e il relativo \gls{traceback} nel dispositivo di output specificato dall'esecutore, utile per esecuzioni via \gls{cli};
-	\item \textbf{MailCatcher}:.
+	\item \textbf{CliCatcher}: stampa l'errore e il relativo \gls{traceback} nel dispositivo di output specificato dall'esecutore, utile per esecuzioni via \gls{cli};
+	\item \textbf{MailCatcher}: notifica l'errore via E-Mail utilizzando il protocollo \gls{smtp}, utile per esecuzione in background del programma.
 \end{itemize}
 \subsubsection{Consumers}
+Considerati i requisiti del team Legalmail è stato implementato un solo \textit{consumer}, denominato \textbf{StandardConsumer} responsabile di notificare via E-Mail il successo o il fallimento dell'esecuzione del test. In caso di successo il componente invia, sempre tramite \gls{smtp}, i risultati prodotti da JMeter. 
 \subsubsection{Dealers}
+Per la distribuzione dei files di input alle macchine slaves è stata implementata una sola modalità, via \gls{scp}, incapsulata nella classe \textbf{StandardDealer}.
 \subsubsection{Parsers}
+Per la modifica del file \texttt{jmx} è stata implementata una sola classe, \textbf{StandardParser}, che permette la modifica della configurazione di carico e di alcune parametri HTTP. I file forniti come input alla classe vengono sovrascritti.
 \subsubsection{Provisioners}
+Per il provisioning delle macchine sono stati sviluppati tre diversi tipi di \textit{provisioner}, in modo da soddisfare le due modalità d'esecuzione previste dal piano di lavoro:
+\begin{itemize}
+	\item \textbf{StandardProvisioner}: presenta un implementazione di facciata: non esegue operazioni sulle macchine ma funziona da intermediario tra l'utente e l'orchestratore, ricevendo gli ip delle macchine slaves come input e consegnandoli come output;
+	\item \textbf{EnsureProvisioner}: tramite l'esecuzione di comandi immessi dall'utente, sfruttando il protocollo \gls{ssh}, si assicura che i server RMI delle macchine slaves siano attivi. Durante la fase di cleanup, la classe s'impegna a spegnere i server RMI. Necessita che le macchine slaves siano già create;
+	\item \textbf{TerraformAwsProvisioner}: sfruttando le funzionalità di Terraform crea e configura per l'esecuzione dei test le macchine slaves ed eventualmente master sui \gls{datacenter} AWS. Durante la fase di cleanup utilizza nuovamente Terraform per distruggere le macchine create.
+\end{itemize}
 \subsubsection{Runners}
+Per l'esecuzione di JMeter è stata creata una sola classe, denominata \textbf{StandardRunner}, che prevede l'esecuzione del software sia che la macchina master esista in locale (sulla stessa macchina in cui è installato l'orchestratore), sia che esista in remoto (un altro computer di cui si conosce l'identificativo). Questa classe oltre che dell'esecuzione si preoccupa di notificarne all'orchestratore il successo/fallimento e il percorso dove sono stati generati i files di risultato.
 \subsubsection{Wizards}
+Per le attuali esigenze è stato generato un solo \textit{wizard}: \textbf{YamlCliWizard}. Questa \textit{actions} svolge un ruolo cruciale per l'usabilità dell'applicativo, permettendo di specificare le configurazioni in due diverse risorse: un file in formato \gls{yaml} e i parametri del costruttore di \textit{JmeterOrchestrator}. \\
+Questa distinzione è stata fatta per specificare le configurazioni di default e probabilmente immutabili, come le configurazioni \gls{smtp} o \gls{ssh}, all'interno del file \gls{yaml}, mentre i parametri più variabili, come la configurazione di carico o i percorsi dei file di input da utilizzare, vengono comunicati all'orchestratore al momento dell'esecuzione, in modo da essere facilmente adattati allo scenario di test che si vuole utilizzare. \\
+Tramite questo \textit{wizard} è possibile inoltre iniettare le \textit{actions} desiderate specificandole nel file \gls{yaml} o nei parametri utente.

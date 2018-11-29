@@ -52,7 +52,7 @@ L'adozione di questo principio, oltre ad essere buona pratica in ogni situazione
 L'obiettivo del progetto era quindi quello di avere codice, si strutturato e funzionale, ma soprattutto funzionante.
 
 \subsection{Core}
-\intro{Per la stesura dei diagrammi mostrati qui di seguito è stato utilizzato il dizionario del linguaggio di programmazione Python.}\\\\
+\intro{Per la stesura dei diagrammi mostrati qui di seguito sono stati utilizzati il dizionario e le annotazioni sintattiche del linguaggio di programmazione Python.}\\\\
 Il cuore di JMeterOrchestrator è stato progettato in modo da rispettare i principi elencati in precedenza e di limitarsi a ricoprire il ruolo base dell'orchestratore: il coordinamento di elementi specializzati. \\
 Questi elementi specializzati prendono il nome di \textbf{actions} e sono descritti da sette interfacce che, una volta implementate, assumono le seguenti responsabilità:
 \begin{itemize}
@@ -71,6 +71,7 @@ Questi elementi specializzati prendono il nome di \textbf{actions} e sono descri
 	\label{img-diagramma-interfacce}
 \end{figure}
 Come si può vedere dal diagramma delle classi, queste interfacce sono strutturalmente molto simili: espongono due metodi (al più tre per il \textit{Provisioner}) con firme quasi identiche. Questa differenziazione è stata pensata in modo da rispettare il principio di segregazione delle interfacce (ISP), in modo da rendere immediato al lettore del codice con quale unità logica si stesse confrontando.\\
+Il costruttore di tutte le \textit{actions} è senza parametri facilitarne l'iniezione. \\
 L'orchestratore, rappresentato dalla classe \textit{JmeterOrchestrator} presenta un'interfaccia molto semplice e propone il pattern \gls{dinje}:
 \begin{figure}[H]
 	\centering
@@ -79,19 +80,47 @@ L'orchestratore, rappresentato dalla classe \textit{JmeterOrchestrator} presenta
 	\label{img-classe-core}
 \end{figure}	
 Le varie actions possono essere infatti "iniettate" dall'utente, sia esso fisico o un'altra componente software, tramite il passaggio di parametri al metodo \texttt{fire} o direttamente dal \textit{Wizard} che, in base alla sua implementazione, può essere in grado di crearle. L'utilizzo del pattern \gls{dinje}, oltre a rendere la classe funzionale ed estensibile, permette di rispettare al meglio i concetti OCP e DIP.\\
-Il coordinamento effettuato dall'orchestratore, compreso lo scambio di messaggi (parametri) tra le varie \textit{actions} è descritto dal seguente diagramma di sequenza:
+Il coordinamento effettuato dall'orchestratore è descritto dal seguente diagramma di sequenza:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=12.5cm]{immagini/coresequence}
+	\includegraphics[width=13cm]{immagini/coresequence}
 	\caption{Diagramma di sequenza del flusso dell'orchestratore}
 	\label{img-core-seqeunce}
 \end{figure}
-Gli ultimi attori della progettazione sono rappresentati dai \textbf{components} unità logiche utilizzate dalle \textit{actions}, ma indipendenti da queste ultime, realizzati in modo da avvicinarsi ai principi SRP e DRY.\\
-Nelle sezioni seguenti verrano presentate, in forma descrittiva, le \textit{actions} e i \textit{components} implementati per dare significato al prodotto sviluppato. La forma descrittiva è usata in modo da non rivelare troppo i dettagli implementativi delle varie componenti.
+Come si può vedere dal diagramma, alcune \textit{actions}, pur essendo indipendenti, possono necessitare di parametri ricavati da \textit{actions} eseguite precedentemente:
+\begin{itemize}
+	\item \textbf{Dealer}: può necessitare dei dati del \textit{Provisioner} per conoscere gli identificativi degli slaves ai quali distribuire i files;
+	\item \textbf{Parser}: può necessitare dei dati del \textit{Provisioner} per conoscere gli identificativi degli slaves e del \textit{Dealer} per conoscere eventuali modifiche da effettuare al file \texttt{jmx};
+	\item \textbf{Runner}: può necessitare dei dati del \textit{Provisioner} per conoscere gli identificativi di master e slaves, dei dati del \textit{Parser} per capire dove recuperare il file \texttt{jmx};
+	\item \textbf{Consumer}: può necessitare dei dati del \textit{Runner} per capire dove recuperare i file di risultato prodotti.
+\end{itemize}
+Gli ultimi attori della progettazione sono rappresentati dai \textbf{components}: unità logiche utilizzate da più \textit{actions}, ma indipendenti da queste ultime, realizzati in modo da avvicinarsi ai principi SRP e DRY.\\
+Nelle sezioni seguenti verranno presentate, in forma descrittiva, le \textit{actions} e i \textit{components} implementati per dare significato al prodotto sviluppato. La forma descrittiva è usata in modo da non rivelare troppo i dettagli implementativi delle varie componenti.
 \subsection{Actions}
 Le \textit{actions} sono raggruppate secondo la loro interfaccia.
 \input{capitoli/capitolo-3/actions}
 \subsection{Components}
+Le funzionalità logiche dell'applicativo sono incapsulate all'interno di classi (annotate in \gls{camelcase}) o moduli (annotati in \gls{snakecase}) e sono così denominate:
+\begin{itemize}
+	\item \textbf{gzipper}: modulo per la compressione, in formato \texttt{gzip} di file e cartelle;
+	\item \textbf{JmxParser}: classe per la gestione delle modifiche ai file \texttt{jmx};
+	\item \textbf{LocalMasterRunner}: classe che incapsula la logica d'esecuzione di JMeter;
+	\item \textbf{SCPDealer}: classe che incapsula la logica di distribuzione dei files agli slaves via \gls{scp};
+	\item \textbf{SCPExecutor}: classe per l'invio di comandi \gls{scp};
+	\item \textbf{shell\_helpers}: modulo contenenti funzioni di aiuto per l'esecuzione di comandi sulla \gls{shell};
+	\item \textbf{SMTPMailer}: classe che semplifica l'invio delle mail tramite protocollo \gls{smtp};
+	\item \textbf{SSHCommandExecutor}: classe che semplifica l'invio di comandi \gls{ssh};
+	\item \textbf{TerraformWrapper}: classe per l'esecuzione dei comandi di Terraform direttamente da Python;
+	\item \textbf{yaml\_injector}: classe per l'injection delle \textit{actions} tramite YAML.
+\end{itemize}
+I moduli e le classi descritte possono essere visti come dei \gls{wrapper} di librerie presenti \gls{out-of-the-box} in Python, in modo da semplificarne l'utilizzo e la leggibilità seguendo il principio KISS.
 \subsection{Diagramma dipendenze actions-components}
+Il diagramma, posizionato alla \hyperref[img-actioncomponents]{fine del capitolo}, descrive le dipendenze tra le varie \textit{actions} e i \textit{components}, in modo da offrire una visione ad alto livello della collaborazione tra le classi sopracitate.
+\begin{sidewaysfigure}[hb]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/actionscomponents}
+	\caption{Diagramma delle dipendenze tra actions e components}
+	\label{img-actioncomponents}
+\end{sidewaysfigure}
 \subsection{Command Line Interface}
 \subsection{Enterprise Edition}
