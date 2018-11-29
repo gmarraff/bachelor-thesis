@@ -52,9 +52,46 @@ L'adozione di questo principio, oltre ad essere buona pratica in ogni situazione
 L'obiettivo del progetto era quindi quello di avere codice, si strutturato e funzionale, ma soprattutto funzionante.
 
 \subsection{Core}
-Core Dependency Injection ->Principi OCP, DIP \\
-Actions Interfaces --> Principio ISP \\
-Components --> Principii DRY, SRP \\
+\intro{Per la stesura dei diagrammi mostrati qui di seguito è stato utilizzato il dizionario del linguaggio di programmazione Python.}\\\\
+Il cuore di JMeterOrchestrator è stato progettato in modo da rispettare i principi elencati in precedenza e di limitarsi a ricoprire il ruolo base dell'orchestratore: il coordinamento di elementi specializzati. \\
+Questi elementi specializzati prendono il nome di \textbf{actions} e sono descritti da sette interfacce che, una volta implementate, assumono le seguenti responsabilità:
+\begin{itemize}
+	\item \textbf{Wizard}: responsabile di normalizzare le configurazioni e/o i parametri ricevuti dall'utente in modo da essere utilizzabili dall'orchestratore. Eventualmente il Wizard si occupa anche di creare e iniettare la actions (dipendenze);
+	\item \textbf{Provisioner}: responsabile di configurare le macchine slaves ed eventualmente master, tramite una potenziale creazione, per l'esecuzione dei test e, una volta terminato, di riportarle allo stato originario, con eventuale distruzione;
+	\item \textbf{Dealer}: responsabile di distribuire alle macchine slaves i file di input necessari per l'esecuzione dei test;
+	\item \textbf{Parser}: responsabile di modificare la configurazione del file \texttt{jmx} secondo i parametri immessi dall'utente;
+	\item \textbf{Runner}: responsabile di avviare la macchina master per l'esecuzione dei test;
+	\item \textbf{Consumer}: responsabile di consumare i dati prodotti dall'esecuzione dei test;
+	\item \textbf{Catcher}: responsabile di catturare eventuali errori (eccezioni) e notificarle all'utilizzatore del software.
+\end{itemize} 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=13cm]{immagini/interfaces}
+	\caption{Diagramma delle interfacce}
+	\label{img-diagramma-interfacce}
+\end{figure}
+Come si può vedere dal diagramma delle classi, queste interfacce sono strutturalmente molto simili: espongono due metodi (al più tre per il \textit{Provisioner}) con firme quasi identiche. Questa differenziazione è stata pensata in modo da rispettare il principio di segregazione delle interfacce (ISP), in modo da rendere immediato al lettore del codice con quale unità logica si stesse confrontando.\\
+L'orchestratore, rappresentato dalla classe \textit{JmeterOrchestrator} presenta un'interfaccia molto semplice e propone il pattern \gls{dinje}:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{immagini/coreclass}
+	\caption{Classe JmeterOrchestrator}
+	\label{img-classe-core}
+\end{figure}	
+Le varie actions possono essere infatti "iniettate" dall'utente, sia esso fisico o un'altra componente software, tramite il passaggio di parametri al metodo \texttt{fire} o direttamente dal \textit{Wizard} che, in base alla sua implementazione, può essere in grado di crearle. L'utilizzo del pattern \gls{dinje}, oltre a rendere la classe funzionale ed estensibile, permette di rispettare al meglio i concetti OCP e DIP.\\
+Il coordinamento effettuato dall'orchestratore, compreso lo scambio di messaggi (parametri) tra le varie \textit{actions} è descritto dal seguente diagramma di sequenza:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12.5cm]{immagini/coresequence}
+	\caption{Diagramma di sequenza del flusso dell'orchestratore}
+	\label{img-core-seqeunce}
+\end{figure}
+Gli ultimi attori della progettazione sono rappresentati dai \textbf{components} unità logiche utilizzate dalle \textit{actions}, ma indipendenti da queste ultime, realizzati in modo da avvicinarsi ai principi SRP e DRY.\\
+Nelle sezioni seguenti verrano presentate, in forma descrittiva, le \textit{actions} e i \textit{components} implementati per dare significato al prodotto sviluppato. La forma descrittiva è usata in modo da non rivelare troppo i dettagli implementativi delle varie componenti.
 \subsection{Actions}
+Le \textit{actions} sono raggruppate secondo la loro interfaccia.
+\input{capitoli/capitolo-3/actions}
+\subsection{Components}
+\subsection{Diagramma dipendenze actions-components}
 \subsection{Command Line Interface}
 \subsection{Enterprise Edition}
