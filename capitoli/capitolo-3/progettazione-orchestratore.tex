@@ -122,5 +122,51 @@ Il diagramma, posizionato alla \hyperref[img-actioncomponents]{fine del capitolo
 	\caption{Diagramma delle dipendenze tra actions e components}
 	\label{img-actioncomponents}
 \end{sidewaysfigure}
+\section{Implementazione}
+Il \textit{core} di JMeterOrchestrator è stato implementato come un \textit{Python Package}\footcite{article:pypackage}. \\
+La struttura del package è rappresentata di seguito.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{immagini/implementation}
+	\caption{Implementazione del package JMeterOrchestrator}
+	\label{img-implementation}
+\end{figure}
 \subsection{Command Line Interface}
-\subsection{Enterprise Edition}
+Per l'utilizzo del package è stata sviluppata una \gls{cli} tramite la libreria Python Click\footcite{site:click}, in modo da facilitare l'accesso alle funzionalità della libreria.\\
+L'interfaccia utilizza lo \textbf{YamlCliWizard} e permette di specificare nei parametri il file \gls{yaml} dal quale prelevare la configurazione. \\
+La \gls{cli} presenta due modalità d'esecuzione:
+\begin{enumerate}
+	\item \textbf{Standard}: dove l'output viene stampato direttamente sulla \gls{shell} d'esecuzione e quest'ultima viene bloccata fino alla fine del processo;
+	\item \textbf{Silent}: dove l'orchestratore viene eseguito in background e l'output stampato in un file specificato tramite parametro dall'utente.
+\end{enumerate}
+\subsection{Graphical User Interface}
+Per facilitare la gestione di più scenari di test, allo stato attuale un'istanza dell'orchestratore può eseguire un solo file di test alla volta, si è deciso di sviluppare una piccola \gls{gui}, utilizzabile via browser e implementata tramite Flask\footcite{site:flask}. \\
+Lo sviluppo di un'interfaccia grafica inoltre permette di migliorare l'accessibilità al package, permettendo anche a utenti non avvezzi all'utilizzo di una \gls{shell} di utilizzare il prodotto senza particolari complicazioni.\\
+La \gls{gui} amplia le funzionalità della libreria:
+\begin{itemize}
+	\item Permette l'archiviazione dei file di test all'interno del \gls{filesystem} del server che ospita il software, in modo da semplificare la ripetibilità dell'esecuzione degli scenari di test;
+	\item Permette la categorizzazione dei file di test in scenari: entità composte da file di test e istanza di JMeterOrchestrator, in modo da poter eseguire più file di test contemporaneamente.
+	\item Permette l'avvio e la terminazione anticipata dell'esecuzione dell'orchestratore;
+	\item Permette di scegliere quale \textit{provisioner} utilizzare, tra \textbf{EnsureProvisioner} e \textbf{TerraformAwsProvisioner};
+	\item Permette di visualizzare l'output dell'orchestratore direttamente sull'interfaccia web.
+\end{itemize}
+La \gls{gui} è il componente che verrà effettivamente installato all'interno dell'infrastruttura aziendale.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{immagini/guihome}
+	\caption{Screenshot pagina Home della GUI}
+	\label{img-guihome}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=6cm]{immagini/guicreate}
+	\caption{Screenshot pagina creazione scenario della GUI}
+	\label{img-guicreate}
+\end{figure}
+ \begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{immagini/guihome}
+ 	\caption{Screenshot pagina visualizzazione scenario della GUI}
+ 	\label{img-guishow}
+ \end{figure}
+\newpage
