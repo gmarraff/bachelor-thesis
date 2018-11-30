@@ -4,3 +4,24 @@
 \subsection{Configurazione Puppet}
 Foreman + Gitlab + Artifactory + Puppet + Disegnetto
 \subsection{Analisi delle capacità dei server}
+Dopo la verifica del corretto funzionamento dell'applicativo all'interno dell'infrastruttura aziendale è stato redatta un analisi sulle capacità dei server istanziati tramite Foreman. Le macchine predisposte dal team \textit{Infrastrutture} sono categorizzate ed etichettate in base alle risorse (CPU, RAM, capacità di archiviazione) ad esse assegnate, scoprire la capacità prestazionale di quest'ultime avrebbe quindi reso più rapida ed efficace la fase di progettazione dei test: quante macchine istanziare per raggiungere la capacità di carico necessaria. \\ 
+L'analisi è stata effettuata usando come server target \texttt{test.loadimpact.com}: sito web realizzato per testare le configurazioni degli strumenti dei test di carico. Questo sito web è stato scelto perché in grado di mantenere tempi di riposta costanti anche all'incorrere di grosso traffico sul server web.\\
+Per evitare di esporre i dettagli dell'infrastruttura aziendale, la categorizzazione dei server e i risultati dell'analisi verranno omessi.\\
+Lo scenario di test è stato composto dai i seguenti step:
+\begin{enumerate}
+	\item Visualizzazione della pagina index (\texttt{/});
+	\item Visualizzazione della pagina \texttt{/news.php};
+	\item Tentativo di login fallito tramite la pagina \texttt{/my\_messages.php};
+	\item Tentativo di login riuscito tramite la pagina \texttt{/my\_messages.php};
+	\item Visualizzazione della pagina \texttt{/my\_messages.php} con utente autorizzato.
+\end{enumerate}
+La capacità prestazionale viene intesa come il numero massimo di utenti attivi (thread) generabili dalla macchina analizzata senza perdere accuratezza nelle misurazioni e/o portare al \gls{crash} del programma JMeter.\\ 
+L'analisi quindi è stata condotta eseguendo i test su una singola macchina slave, aumentando, ad ogni iterazione avvenuta con successo, il numero di thread da generare fino all'incorrere di una delle seguenti condizioni rappresentanti il limite del server in analisi:
+\begin{itemize}
+	\item \textbf{Non accuratezza delle misurazioni}: se le misurazioni dei tempi di risposta fossero risultate troppo distanti dalle misurazioni rilevate nell'iterazione precedente;
+	\item \textbf{Instabilità}: se la macchina non fosse stata in grado di mantenere stabile il numero di thread generati durante l'esecuzione del test;
+	\item \textbf{Crash}: se il programma JMeter avesse smesso di funzionare non portando a termine l'esecuzione del test.
+\end{itemize}
+Per verificare i tempi di risposta standard del server target è stato utilizzato CURL\footcite{site:curl}, in modo da avere una base affidabile di misurazione.\\
+Per verificare che tempi di riposta inusuali fossero dipendenti unicamente dalle macchine in esame e non dal server target, i test non affidabili sono stati ripetuti con la stessa configurazione di carico ma distribuito su più macchine slaves.\\
+L'analisi non è ovviamente rappresentativa di tutti i casi di test, ma può essere utilizzata come per base impostare limiti superiori alla capacità delle macchine aziendali.
