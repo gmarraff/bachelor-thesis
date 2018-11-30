@@ -1,8 +1,25 @@
 % !TEX encoding = UTF-8
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
-\subsection{Configurazione Puppet}
-Foreman + Gitlab + Artifactory + Puppet + Disegnetto
+\subsection{Configurazione}
+L'installazione sull'infrastruttura aziendale è avvenuta tramite l'utilizzo di vari strumenti: in primis è stato creato un repository su Gitlab, la piattaforma di version control adottata da Infocert. Il mantenimento del repository è stato effettuato utilizzando il modello di branching \textit{Git Flow}\footcite{article:gitflow}. \\
+Una volta verificato il corretto funzionamento del prodotto sulla macchina locale è stata generata una \gls{build} del software, archiviata in formato \texttt{gzip} e caricata su Artifactory, la piattaforma aziendale per la distribuzione dei pacchetti software.\\
+Successivamente sono state identificate due tipologie di macchine da descrivere per il funzionamento dell'applicativo:
+\begin{itemize}
+	\item \textbf{Master}: ospitanti JMeterOrchestrator, JMeter e Terraform;
+	\item \textbf{Slave}: ospitanti solamente JMeter.
+\end{itemize}
+L'insieme delle due tipologie di server prende il nome di \textbf{JMeterCluster} e contiene imperativamente una macchina Master e almeno una macchina Slave.\\
+I vari JMeterCluster sono stati poi istanziati tramite Foreman negli ambienti di sviluppo, test e accettazione.\\
+I JMeterCluster sono stati poi modellati tramite opportuni file di configurazione Puppet. Le macchine Slave sono state predisposte per la sola installazione e configurazione del software JMeter con relativo ambiente Java, le macchine Master, in aggiunta hanno previsto:
+\begin{itemize}
+	\item L'installazione e configurazione del software Terraform;
+	\item L'installazione e configurazione del software JMeter Orchestrator con relativo ambiente Python;
+	\item I file di configurazione per il corretto funzionamento dell'applicativo JMeterOrchestrator, comprensivo di configurazioni \gls{smtp} e \gls{ssh};
+	\item L'installazione e configurazione del server Gunicorn\footcite{site:gunicorn} per l'esposizione dei servizi Flask;
+	\item L'installazione dei file di credenziali per l'account AWS;
+	\item L'installazione delle chiavi \gls{ssh} per la comunicazione con le macchine istanziate nella piattaforma AWS.
+\end{itemize}
 \subsection{Analisi delle capacità dei server}
 Dopo la verifica del corretto funzionamento dell'applicativo all'interno dell'infrastruttura aziendale è stato redatta un analisi sulle capacità dei server istanziati tramite Foreman. Le macchine predisposte dal team \textit{Infrastrutture} sono categorizzate ed etichettate in base alle risorse (CPU, RAM, capacità di archiviazione) ad esse assegnate, scoprire la capacità prestazionale di quest'ultime avrebbe quindi reso più rapida ed efficace la fase di progettazione dei test: quante macchine istanziare per raggiungere la capacità di carico necessaria. \\ 
 L'analisi è stata effettuata usando come server target \texttt{test.loadimpact.com}: sito web realizzato per testare le configurazioni degli strumenti dei test di carico. Questo sito web è stato scelto perché in grado di mantenere tempi di riposta costanti anche all'incorrere di grosso traffico sul server web.\\

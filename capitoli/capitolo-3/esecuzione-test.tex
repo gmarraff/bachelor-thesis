@@ -1,5 +1,15 @@
 % !TEX encoding = UTF-8
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
-
-Sia usando Intranet che AWS dopo ottima collaborazione con gli altri team
+Per l'esecuzione è stato scritto uno scenario di test atto a verificare il corretto funzionamento del software sviluppato. \\
+Lo scenario di test comprende:
+\begin{itemize}
+	\item Accesso alla home page dell'applicativo;
+	\item Esecuzione della procedura di login;
+	\item Visualizzazione della dashboard informativa;
+	\item Navigazione nelle varie pagine dell'applicativo.
+\end{itemize}
+I dettagli delle richieste effettuate all'applicativo Legalmail, così come i risultati del test, sono stati volontariamente omessi per motivi di policy aziendale.\\
+Come server target è stato utilizzato quello riposto all'interno dell'ambiente di collaudo/accettazione, mentre come macchine master e slave sono state usate istanze create nell'ambiente di accettazione. \\
+Grazie all'ottima collaborazione con i team \textit{Network} e \textit{Infratrutture} è stato anche possibile eseguire i test utilizzando il \textbf{TerraformAwsProvisioner}: installando il JMeterOrchestrator all'interno della rete aziendale e, tramite esso, istanziando per la sola esecuzione del test le macchine slaves e master sulla piattaforma di \gls{cloud} AWS. \\
+Entrambe le esecuzioni sono andate a buon fine, certificando il funzionamento dell'applicativo.

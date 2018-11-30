@@ -115,13 +115,13 @@ Le funzionalità logiche dell'applicativo sono incapsulate all'interno di classi
 \end{itemize}
 I moduli e le classi descritte possono essere visti come dei \gls{wrapper} di librerie presenti \gls{out-of-the-box} in Python, in modo da semplificarne l'utilizzo e la leggibilità seguendo il principio KISS.
 \subsection{Diagramma dipendenze actions-components}
-Il diagramma, posizionato alla \hyperref[img-actioncomponents]{fine del capitolo}, descrive le dipendenze tra le varie \textit{actions} e i \textit{components}, in modo da offrire una visione ad alto livello della collaborazione tra le classi sopracitate.
-\begin{sidewaysfigure}[hb]
+Il diagramma descrive le dipendenze tra le varie \textit{actions} e i \textit{components}, in modo da offrire una visione ad alto livello della collaborazione tra le classi sopracitate.
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{immagini/actionscomponents}
+	\includegraphics[height=\textheight]{immagini/actionscomponents}
 	\caption{Diagramma delle dipendenze tra actions e components}
 	\label{img-actioncomponents}
-\end{sidewaysfigure}
+\end{figure}
 \section{Implementazione}
 Il \textit{core} di JMeterOrchestrator è stato implementato come un \textit{Python Package}\footcite{article:pypackage}. \\
 La struttura del package è rappresentata di seguito.
@@ -169,4 +169,3 @@ La \gls{gui} è il componente che verrà effettivamente installato all'interno d
  	\caption{Screenshot pagina visualizzazione scenario della GUI}
  	\label{img-guishow}
  \end{figure}
-\newpage
