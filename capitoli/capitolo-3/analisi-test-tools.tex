@@ -16,7 +16,7 @@ In questa sezione viene analizzato il cuore dell'intero studio: lo strumento dei
 \end{enumerate}
 \subsection{Strumenti Visionati}
 Sebbene questi strumenti sono sempre più diffusi, non c'è ancora molta letteratura a riguardo si cui studiare sopra. Molti articoli inoltre sono scritti dagli stessi produttori del software, necessitando una certa cautela durante la lettura per evitare di "farsi vendere il vino dall'oste".\\
-Tutti gli articoli visionati per l'analisi degli strumenti sono citati all'interno della bibliografia, nella sezione \textit{Analisi degli strumenti di test di carico}.\\
+Per una corretto approccio all'analisi sono state visionate diverse fonti, tra le quali: LoadImpact\footcite{article:libenchmark}\textsuperscript{,} \footcite{article:libenchmark2}\textsuperscript{,}\footcite{article:lireview}, Blazemeter\footcite{article:blzbench}, OctoPerf\footcite{article:octoperf}, EasyQA\footcite{article:easyqa} e DZone\footcite{article:jmetervswrk}. Altre informazioni sono state reperite tramite la consultazione dei siti ufficiali dei software e tra le varie discussioni su repository ufficiali degli stessi. \\
 Tutti gli strumenti visionati sono \textit{Open Source} e, salvo diversamente indicato, sono manutenuti in modo frequente.
 \input{capitoli/capitolo-3/strumenti-visionati}
 \subsection{Valutazioni intermedie}
@@ -38,6 +38,10 @@ I quattro candidati più promettenti sono poi stati sottoposti ad un ulteriore s
 \end{itemize}
 Lo scenario di test rappresentato simula una semplice navigazione di quattro pagine di un sito web.\\
 \newpage
+\begingroup
+\let\clearpage\relax
+\let\cleardoublepage\relax
+\let\cleardoublepage\relax
 \begin{table}[H]
 \def\arraystretch{2}
 \begin{center}
@@ -59,11 +63,12 @@ Lo scenario di test rappresentato simula una semplice navigazione di quattro pag
 		
 		\textbf{K6} & PRO & -Supporta tutta l'interprete Javascript \newline-Recording del browser semplice\newline-Facile da modularizzare & -Facile da configurare\newline-Permette la configurazione tramite files JSON &  & -Documentazione chiara e completa \\ \hline
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		& CON & -Scenari lunghi possono generare file scarsamente leggibili se non strutturati con criterio & -Solo Open & -Non \gls{out-of-the-box}: necessita di script ad hoc per funzionare & -Community ancora di nicchia   \\ \hline\hline
+		& CON & -Scenari lunghi possono generare file scarsamente leggibili se non strutturati con criterio & -Solo Open & -Non \gls{out-of-the-box}: necessita di script ad hoc per funzionare & -Community ancora di nicchia   \\ \hline
 	\end{tabular}
 \end{center}
 \caption{Pro e Contro strumenti installati}
 \end{table}
+\endgroup
 \subsection{Valutazioni Finali}
 La prova dei candidati ha mostrato due fazioni ben distinte: da un lato K6 e Gatling: tool moderni e funzionali con il design progettato per soddisfare le esigenze degli sviluppatori; dall'altra JMeter e Tsung: strumenti più robusti e versatili ma con un'usabilità più vicina al mondo del \gls{qa}. \\
 Tuttavia, la mancanza di un sistema d'esecuzione distribuita \gls{out-of-the-box} dei primi due si è rivelata una pecca piuttosto grave, ricordando come la \textit{potenza}, intesa come capacità di carico generato, sia un'elemento chiave di questa ricerca e una caratteristica necessaria per gli strumenti in esame. \\
