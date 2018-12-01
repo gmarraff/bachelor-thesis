@@ -2,7 +2,7 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
 \subsection{Obiettivi}
-In questa sezione viene analizzato il cuore dell'intero studio: lo strumento dei test di carico. In particolare, dopo diverse discussioni con il tutor aziendale sono emerse le caratteristiche principali che il software avrebbe dovuto dimostrare (in ordine di importanza):
+In questa sezione viene analizzato il cuore dell'intero studio: lo strumento per i test di carico. In particolare, dopo diverse discussioni con il tutor aziendale sono emerse le caratteristiche principali che il software avrebbe dovuto dimostrare (in ordine di importanza):
 \begin{enumerate}
 	\item \textbf{Vitalità}: un requisito fondamentale era che il software fosse vivo: ampliato e manutenuto costantemente.\\ Potenzialmente i test di carico diventeranno un elemento cruciale della certificazione della qualità dei prodotti aziendali, la scoperta di bug molto gravi all'interno dello strumento di test di carico non può essere ignorata, un team di sviluppo attivo si opererebbe al più presto per correggere il difetto;
 	\item \textbf{Open Source}: un requisito che si collega al precedente: eventuali bug potrebbero essere risolti dai team di sviluppo aziendali se il software utilizzato fosse condiviso, inoltre eventuali personalizzazioni interne potrebbero migliorarne l'uso;
@@ -23,7 +23,7 @@ Tutti gli strumenti visionati sono \textit{Open Source} e, salvo diversamente in
 Gli strumenti descritti in precedenza, sono solo una parte di quelli presenti sul mercato, tuttavia dati i limiti di tempo non era possibile analizzarli tutti. \\
 Di quelli analizzati, tuttavia, i candidati più vicini alle caratteristiche richieste sono risultati essere: \textbf{JMeter}, \textbf{Tsung}, \textbf{Gatling} e \textbf{K6}: i primi due per la maturità, versatilità e robustezza dimostrati negli anni; i secondi, di più recente fattura, per il loro design più moderno e per maggiore vicinanza alle pratiche \gls{devops}.
 La soluzione ideale sarebbe rappresentata dalla fusione delle caratteristiche principali degli strumenti citati, idea che trova modo di esprimersi attraverso \textbf{Taurus}, che, esponendo JMeter tramite un interfaccia molto semplice avvicinandolo alle pratiche \gls{devops}, ingloba tutte le caratteristiche ricercate da questo studio. Tuttavia, l'elevato prezzo di sottoscrizione ne rende proibitiva l'adozione. \\
-\textbf{Wrk}, \textbf{Apachebench} e \textbf{Bees with machine guns} potrebbero essere integrati per realizzare gli stress test, considierata la facilita con la quale permettono di generare un grosso carico, tuttavia, una buona conoscenza dei tool citati in precedenza può portare agli stessi risultati evitando l'apprendimento di altri strumenti. \\
+\textbf{Wrk}, \textbf{Apachebench} e \textbf{Bees with machine guns} potrebbero essere integrati per realizzare gli stress test, considerata la facilita con la quale permettono di generare un grosso carico, tuttavia, una buona conoscenza dei tool citati in precedenza può portare agli stessi risultati evitando l'apprendimento di altri strumenti. \\
 \textbf{The Grinder} è un prodotto solido, ma la scarsa vitalità lo rende inadatto agli scopi aziendali.
 \textbf{Locust} è un altro prodotto degno di nota ma le opinioni contrastanti trovate sul suo conto non hanno convinto i referenti aziendali ad approfondirne le caratteristiche. \\
 In ultimo troviamo \textbf{Artillery}, \textbf{Vegeta} e \textbf{Siege} che, sebbene con caratteristiche differenti, sono accomunati dalla scarsa maturità, rendendoli inadeguati alle aspettative aziendali.
@@ -55,11 +55,11 @@ Lo scenario di test rappresentato simula una semplice navigazione di quattro pag
 		
 		\textbf{Tsung} & PRO & -\gls{dsl} Espressivo \newline-Recording del browser semplice & -Facile da configurare & -\gls{out-of-the-box} & -Documentazione chiara e completa \\ \hline
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		& CON & -Scenari particolari richiedono l'uso di Erlang\newline -XML oneroso da modificare a mano & -Solo Open & -Definzione del cluster da XML e non da parametri & -Community non molto attiva  \\ \hline\hline
+		& CON & -Scenari particolari richiedono l'uso di Erlang\newline -XML oneroso da modificare a mano & -Solo Open & -Definizione del cluster da XML e non da parametri & -Community non molto attiva  \\ \hline\hline
 		
 		\textbf{Gatling} & PRO & -\gls{dsl} Facile ed espressivo \newline-Recording del browser semplice\newline-Facile da modularizzare & -Open/Closed  \newline -Facile da configurare \newline -Molto personalizzabile &  & -Buona documentazione \newline-Community Attiva-\newline-Molti tutorial \\ \hline
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		& CON & -Scenari particolari potrebbero richiedere la conoscenza di Scala &  & -Non \gls{out-of-the-box}: necessita di script ad hoc per funzonare &   \\ \hline\hline
+		& CON & -Scenari particolari potrebbero richiedere la conoscenza di Scala &  & -Non \gls{out-of-the-box}: necessita di script ad hoc per funzionare &   \\ \hline\hline
 		
 		\textbf{K6} & PRO & -Supporta tutta l'interprete Javascript \newline-Recording del browser semplice\newline-Facile da modularizzare & -Facile da configurare\newline-Permette la configurazione tramite files JSON &  & -Documentazione chiara e completa \\ \hline
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -71,5 +71,5 @@ Lo scenario di test rappresentato simula una semplice navigazione di quattro pag
 \endgroup
 \subsection{Valutazioni Finali}
 La prova dei candidati ha mostrato due fazioni ben distinte: da un lato K6 e Gatling: tool moderni e funzionali con il design progettato per soddisfare le esigenze degli sviluppatori; dall'altra JMeter e Tsung: strumenti più robusti e versatili ma con un'usabilità più vicina al mondo del \gls{qa}. \\
-Tuttavia, la mancanza di un sistema d'esecuzione distribuita \gls{out-of-the-box} dei primi due si è rivelata una pecca piuttosto grave, ricordando come la \textit{potenza}, intesa come capacità di carico generato, sia un'elemento chiave di questa ricerca e una caratteristica necessaria per gli strumenti in esame. \\
+Tuttavia, la mancanza di un sistema d'esecuzione distribuita \gls{out-of-the-box} dei primi due si è rivelata una pecca piuttosto grave, ricordando come la \textit{potenza}, intesa come capacità di carico generato, sia un elemento chiave di questa ricerca e una caratteristica necessaria per gli strumenti in esame. \\
 La scelta quindi si è spostata sul secondo blocco di strumenti e, pur constatando l'ottima fattura di Tsung, la familiarità con l'ambiente Java da parte dell'azienda e l'ottima reputazione del software di Apache hanno decretato \textbf{JMeter} come lo strumento ideale per l'esecuzione dei test di carico nell'ambiente Enterprise di Infocert S.p.A.

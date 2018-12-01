@@ -2,12 +2,11 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
 \subsection{Metodologia SCRUM}
-%TODO: glossario
-La metodologia utilizzata dal team Legalmail (e dalla maggior parte dei restanti team in Infocert) è quella Agile, implementata tramite il \gls{framework} SCRUM.
-Questa metodologia impone un'approccio semplice ma efficace per la gestione del ciclo di vita del software e fa leva sulla capacità auto organizzativa del team di sviluppo. \\
+La metodologia utilizzata dal team Legalmail (e dalla maggior parte dei restanti team in Infocert) è quella \gls{agile}, implementata tramite il \gls{framework} SCRUM.
+Questa metodologia impone un approccio semplice ma efficace per la gestione del ciclo di vita del software e fa leva sulla capacità auto organizzativa del team di sviluppo. \\
 In un team SCRUM infatti sono presenti solo 3 categorie di elementi e sono pensate per permettere agli sviluppatori di concentrarsi principalmente sul lavoro da effettuare piuttosto che all'interazione con gli \gls{stakeholders}.
 \begin{itemize}
-	\item \textbf{Product Owner}: il ruolo del Product Owner è cruciale in quanto rappresenta il ponte tra team di sviluppo e stakeholders. Il PO hai infatti il compito di convertire i requisiti del cliente in items usabili dal team di sviluppo, oltre ha comunicare eventuali variazioni delle tempistiche agli stakeholders;
+	\item \textbf{Product Owner (PO)}: il ruolo del Product Owner è cruciale in quanto rappresenta il ponte tra team di sviluppo e stakeholders. Il PO hai infatti il compito di convertire i requisiti del cliente in items usabili dal team di sviluppo, oltre a comunicare eventuali variazioni delle tempistiche agli stakeholders;
 	\item \textbf{Scrum Master}: il ruolo dello Scrum Master è essenziale per permettere il corretto svolgimento dello sprint, questo infatti s'impegna a rimuovere ostacoli nello sviluppo (come improvvisa mancanza di personale, assegnamento di maggiori risorse su un particolare compito etc.) e a variare gli obiettivi fissati nello sprint planning in base al feedback offerto dagli sviluppatori;
 	\item \textbf{Team di Sviluppo}: Il team di sviluppo rappresenta tutti i membri responsabili delle varie fasi del ciclo di vita del software ed è completamente autonomo: al suo interno ci sono tutte le competenze necessarie per iniziare e finire il progetto. I componenti del gruppo sono in grado di organizzarsi da soli e assegnarsi le attività che ritengono più appropriate in modo completamente indipendente. \\
 	Avendo l'azienda abbracciato la filosofia \gls{devops} i team di sviluppo si dividono internamente in:
@@ -19,22 +18,22 @@ In un team SCRUM infatti sono presenti solo 3 categorie di elementi e sono pensa
 I momenti formali che prevede questa metodologia sono chiamati eventi e sono \textit{Sprint}, \textit{Sprint Planning}, \textit{Daily Scrum}, \textit{Sprint Review} e \textit{Sprint retrospective}.\\
 Gli eventi a cui ho avuto modo di partecipare attivamente sono stati lo Scrum Daily e lo Sprint. Il primo è una breve riunione di massimo 15 minuti effettuata nel primo mattino atta ad esporre ai colleghi le attività lavorative svolte nella precedente giornata e ad organizzare le prossime 24 ore, durante la riunione vengono esposti anche eventuali problemi sorti durante lo sviluppo in modo da aggiornare i colleghi sullo stato del lavoro che si sta svolgendo.
 Durante questa breve riunione viene aggiornata la SCRUM board con le informazioni rilevate, permettendo allo SCRUM master di adeguare la visione generale dello stato del progetto.
-La SCRUM board è una lavagna che tiene traccia dei task che i Dev e gli Ops devono svolgere durante lo sprint e permettono allo Scrum master di avere una buona visione d'insieme del suo andamento. La struttura della SCRUM board è a discrezione delle esigenze del team, per quanto riguarda Legalmail ogni riga rappresenta un componente del team mentre le colonne sono divise in:
+La SCRUM board è una lavagna che tiene traccia dei \gls{task} che i Dev e gli Ops devono svolgere durante lo sprint e permettono allo Scrum master di avere una buona visione d'insieme del suo andamento. La struttura della SCRUM board è a discrezione delle esigenze del team, per quanto riguarda Legalmail ogni riga rappresenta un componente del team mentre le colonne sono divise in:
 \begin{itemize}
 	\item \textbf{Todo}: I compiti assegnati al componente ma non ancora presi in carico dallo stesso;
 	\item \textbf{Progress}: I compiti assegnati che il componente ha iniziato a svolgere;
 	\item \textbf{Impediment}: I compiti che non possono proseguire perché bloccati da impedimenti al di fuori della responsabilità del componente;
-	\item \textbf{Developed}: I compiti sviluppati dal componente che devono essere verificati;
+	\item \textbf{Developed}: I compiti sviluppati che devono essere verificati;
 	\item \textbf{Testing}: I compiti in fase di verifica;
 	\item \textbf{Failed}: I compiti che non hanno soddisfatto i requisiti richiesti;
 	\item \textbf{Done}: I compiti che sono terminati ed hanno ricevuto l'approvazione da parte dello SCRUM master.
 \end{itemize}
-Dopo poche partecipazioni ho assorbito l'importanza di questo momento: il fatto di esporre a tutto il team il problema riscontrato permette di giungere più facilmente ad una soluzione. Può essere infatti che un membro esterno alla vicenda (il compito da svolgere) si sia imbattuto in un problema simile nel passato e abbia trovato una soluzione, ma il componente colpito dal problema non essendone a conoscenza non può confrontarsi con il diretto interessato. Grazie a questi 15 minuti di condivisione invece, il collega può prendere visione del problema e proporre la sua soluzione, permettendo al team di risparmiare tempo e procedere velocemente verso la conclusione del task assegnato.
+Dopo poche partecipazioni ho assorbito l'importanza di questo momento: il fatto di esporre a tutto il team il problema riscontrato permette di giungere più facilmente ad una soluzione. Può essere infatti che un membro esterno alla vicenda (\gls{task}) si sia imbattuto in un problema simile nel passato e abbia trovato una soluzione, ma il componente colpito dal problema, non essendone a conoscenza, non può confrontarsi con il diretto interessato. Grazie a questi 15 minuti di condivisione invece, il collega può prendere visione del problema e proporre la sua soluzione, permettendo al team di risparmiare tempo e procedere velocemente verso la conclusione del \gls{task} con problemi.
 Lo sprint è invece l'effettiva finestra temporale nella quale si prefissano degli obiettivi che dovranno essere completati alla fine della stessa. All'interno del team Legalmail la durata di uno sprint è stata fissata a 14 giorni (10 giorni lavorativi). \\
-Ogni informazione aggiuntiva può essere ricavata visitando il sito ufficiale della metodologia SCRUM. %TODO: BIBLIO
+Ogni informazione aggiuntiva può essere ricavata visitando il sito ufficiale della metodologia SCRUM\footcite{site:scrum}.
 \subsection{Infrastruttura e Applicazioni}
 \label{subsec:infra}
 Infocert è un'azienda che sviluppa prodotti di stampo Enterprise: soluzioni dalla grande distribuzione rivolte ad aziende molto grandi e importanti. Per garantire qualità in termini di prodotto ai suoi clienti, l'azienda ha negli anni maturato diverse certificazioni necessarie per lo sviluppo di certi tipi di applicativi, queste certificazioni si portano l'onere di rispettare imposizioni particolari, imponendo una determinata \gls{way-of-working} aziendale.
 I server utilizzati per conservare determinati tipi di dati, ad esempio, devono rispettare caratteristiche di sicurezza non banali, impedendo ai team dei vari prodotti di gestire in totale libertà la loro infrastruttura. \\
-L'azienda ha quindi predisposto un team, \textit{Infrastructure} per l'appunto, dedito alla definizione e implementazione di standard per la creazione delle macchine virtuali utilizzate per ospitare le applicazioni, lasciando come unica libertà agli \textit{ops} quella di configurare, nei limiti definiti, le macchine richieste. \\
+L'azienda ha quindi predisposto un team, \textit{Infrastrutture} per l'appunto, dedito alla definizione e implementazione di standard per la creazione delle macchine virtuali utilizzate per ospitare le applicazioni, lasciando come unica libertà agli \textit{ops} quella di configurare, nei limiti definiti, le macchine richieste. \\
 Questa specificazione non è atta in alcun modo a screditare le modalità operative aziendali, ma è stata introdotta per giustificare alcune scelte adoperate per portare a termine il progetto di stage che, come descritto nei capitoli successivi, ha dovuto accettare dei compromessi per essere integrato nell'infrastruttura aziendale.

@@ -2,24 +2,21 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
 \subsection{Descrizione}
-%BIB:https://www.guru99.com/performance-testing.html
 Il progetto Test di Carico, nella sua accezione più semplice, si traduce in un effettivo caso di studio dello stato dell'arte del mondo del \textbf{Performance Testing}. \\
 Questo processo è una categoria di test di sistema essenziale per applicazioni esposte a grandi flussi di utenza e con vincoli di qualità stringenti riguardanti le performance del sistema. Lo scopo finale di questi test è infatti quello di misurare le prestazioni di un applicativo a svariati livelli di utilizzo permettendo di determinarne eventuali pregi e difetti, e attestare la qualità del software prima del rilascio. \\
 Applicativi rilasciati senza includere i Performance Test nella fase di validazione spesso presentano problemi di reattività, peggiorando l'esperienza dell'utente e causando cattiva reputazione del servizio. \\
-Esistono svariate declinazioni dei performance test, tutte concentrate sui vari aspetti dei possibili problemi di prestazioni e incentrate su determinati tipi di metrica. \\
+Esistono svariate declinazioni dei performance test\footcite{article:performancetest}, tutte concentrate sui vari aspetti dei possibili problemi di prestazioni e incentrate su determinati tipi di metrica. \\
 Lo stage si è concentrato su due particolari categorie di questi test, i \textbf{Test di carico} e gli \textbf{Stress Test}.
 \subsubsection{Test di carico}
-%BIB:https://www.guru99.com/load-testing-tutorial.html
-I test di carico si concentrano sul verificare le abilità del sistema a rispondere a flussi di carico predeterminati, ricavati da aspettative di popolarità che l'applicativo dovrà sostenere. In questo particolare tipo di test infatti si applica il traffico desiderato al sistema, verificando che i tempi di risposta (e quindi l'esperienza utente) siano coerenti con i valori indicati negli \gls{sla}. \\
+I test di carico\footcite{article:loadtest} si concentrano sul verificare le abilità del sistema a rispondere a flussi di carico predeterminati, ricavati da aspettative di popolarità che l'applicativo dovrà sostenere. In questo particolare tipo di test infatti si applica il traffico desiderato al sistema, verificando che i tempi di risposta (e quindi l'esperienza utente) siano coerenti con i valori indicati negli \gls{sla}. \\
 Dai risultati prodotti da questo test si deduce se l'infrastruttura a supporto dell'applicativo sia adeguata a sostenere il flusso d'utenza che gli studi di mercato predicono.
 \subsubsection{Stress Test}
-%BIB:https://www.guru99.com/stress-testing-tutorial.html
-Gli stress test tendono invece ad individuare il limite superiore delle performance di un sistema, verificando la robustezza di un applicativo all'insorgere di flussi d'utenza non previsti inizialmente. \\
+Gli stress test\footcite{article:stresstest} tendono invece ad individuare il limite superiore delle performance di un sistema, verificando la robustezza di un applicativo all'insorgere di flussi d'utenza non previsti inizialmente. \\
 Questo processo quindi viene fatto aumentando gradualmente le richieste al sistema fino all'insorgere di risposte non previste per arrivare eventualmente alla rottura del sistema, ovvero quando il software smette completamente di rispondere. \\\\\\\\
-La prima parte dello studio si è quindi concentrata sulla ricerca delle soluzioni software presenti sul mercato che permettano di simulare il comportamento di un grande flusso di utenti, software racchiusi nella categoria dei \textbf{Load testing tools}. \\
-Essendo Legalmail un prodotto enterprise il traffico d'utenza usuale è molto alto, richiedendo un grande sforzo computazionale per simularne il volume; per questo la seconda parte dello studio è stata rivolta all'analisi delle soluzioni nel cloud che permettano la simulazione di questi carichi in caso l'infrastruttura interna dell'azienda non ne fosse in grado. \\
+La prima parte dello studio si è quindi concentrata sulla ricerca delle soluzioni software presenti sul mercato che permettessero di simulare il comportamento di un grande flusso di utenti, software racchiusi nella categoria dei \textbf{Load testing tools}. \\
+Essendo Legalmail un prodotto enterprise il traffico d'utenza usuale è molto alto, richiedendo un grande sforzo computazionale per simularne il volume; per questo la seconda parte dello studio è stata rivolta all'analisi delle soluzioni nel \gls{cloud} che permettessero la simulazione di questi carichi in caso l'infrastruttura interna dell'azienda non ne fosse in grado. \\
 Una volta ottenute le basi teoriche sopraelencate si sarebbe progettata ed implementata un'infrastruttura che permettesse l'esecuzione di questi test in modo \textit{semplice}, \textit{flessibile}, \textit{ripetibile}, ed \textit{automatizzabile}.\\
-Per un'efficacie realizzazione dei test di performance non è sufficiente l'implementazione dell'infrastruttura per l'esecuzione dei test, ma si necessita di strumenti di monitoraggio delle macchine target e ingegnerizzazione della reportistica. Tuttavia, essendo il tempo di tirocinio limitato, lo scopo ultimo dello stage è quello di creare una solida base per l'esecuzione di questi test, in modo da essere estensibile per eventuali sviluppi futuri.
+Per un'efficace realizzazione dei test di performance non è sufficiente l'implementazione dell'infrastruttura per l'esecuzione dei test, ma si necessita di strumenti di monitoraggio delle macchine target e ingegnerizzazione della reportistica. Tuttavia, essendo il tempo di tirocinio limitato, lo scopo ultimo dello stage è quello di creare una solida base per l'esecuzione di questi test, in modo da essere estensibile per eventuali sviluppi futuri.
 
 
 \subsection{Obiettivi}
@@ -36,7 +33,7 @@ Gli obiettivi fissati sono dunque:
 \begin{itemize}
 	\item \textbf{Minimi}
 	\begin{itemize}
-		\item \underline{\textit{MIN01}}: Individuazione degli strumenti idonei agli obiettivi dello stage (strumenti di load test, soluzioni cloud);
+		\item \underline{\textit{MIN01}}: Individuazione degli strumenti idonei agli obiettivi dello stage (strumenti di load test, soluzioni \gls{cloud});
 		\item \underline{\textit{MIN02}}: Realizzazione infrastruttura di sviluppo per test di carico;
 		\item \underline{\textit{MIN03}}: Installazione suite test di carico con relativi casi di test;
 		\item \underline{\textit{MIN04}}: Documentazione di Progettazione e Sviluppo dei componenti menzionati nei punti precedenti;
@@ -52,7 +49,7 @@ Gli obiettivi fissati sono dunque:
 		\item \underline{\textit{FOR01}}: Collegato a \textit{MIN01}. Acquisizione teorica dei principi dei test di carico e gestione delle infrastrutture;
 		\item \underline{\textit{FOR02}}: Collegato a \textit{MIN02}. Acquisizione pratica di strumenti per la gestione delle infrastrutture;
 		\item \underline{\textit{FOR03}}: Collegato a \textit{MIN03}. Acquisizione pratica sull'utilizzo di uno strumento dei test di carico;
-		\item \underline{\textit{FOR04}}: Utilizzo della metodologia agile in ambito aziendale;		
+		\item \underline{\textit{FOR04}}: Utilizzo della metodologia \gls{agile} in ambito aziendale;		
 	\end{itemize}
 \end{itemize}
 \subsection{Pianificazione Temporale}
@@ -62,13 +59,13 @@ Le milestone fissate sono le seguenti:
 	\item \underline{\textit{M1}}: Fine primo sprint, analisi di strumenti per test di carico e reportistica, selezione infrastruttura;
 	\item \underline{\textit{M2}}: Fine secondo sprint, predisposizione ambiente di sviluppo con relativa installazione dei tools oggetto di stage;
 	\item \underline{\textit{M3}}: Fine terzo sprint, predisposizione e dimensionamento ambienti di test, accettazione;
-	\item \underline{\textit{M4}}: Fine quarto sprint, predisposizione e dimensionamento ambiente di produzione, primo test di carico in ambiente di accettazione;
-	\item \underline{\textit{M5}}: Fine quarto sprint, documentazione infrastruttura, test di carico, analisi risultati e report finale con presentazione della piattaforma al team.
+	\item \underline{\textit{M4}}: Fine quarto sprint, esecuzione del primo test di carico in ambiente di accettazione;
+	\item \underline{\textit{M5}}: Fine quarto sprint, documentazione infrastruttura, analisi risultati e report finale con presentazione della piattaforma al team.
 \end{itemize}
 \subsection{Prodotti Attesi}
 A seguito degli obiettivi fissati sono stati definiti dei prodotti che potessero attestare il soddisfacimento dei requisiti:
 \begin{enumerate}
-	\item Definizione infrastruttura per gli ambienti di sviluppo, test, accettazione e produzione.\\ 
+	\item Definizione infrastruttura per gli ambienti di sviluppo, test e accettazione.\\ 
 	Ciascun ambiente sarà composto da:
 	\begin{itemize}
 		\item Strumenti per l'esecuzione di test di carico;
@@ -79,7 +76,7 @@ A seguito degli obiettivi fissati sono stati definiti dei prodotti che potessero
 
 \subsection{Vincoli Metodologici}
 La realizzazione dello studio e la progettazione dell'infrastruttura non hanno subito limitazioni durante il loro svolgimento, ogni obiettivo è stato perseguito in piena libertà, ponendo come unico obbligo la documentazione adeguata di ogni scelta progettuale e metodologica effettuata. \\
-L'azienda ha inoltre posto forte attenzione sulla mia partecipazione agli eventi SCRUM affrontati nel periodo di stage, in modo da ampliare la mia formazione sulle metodologie Agile.
+L'azienda ha inoltre posto forte attenzione sulla mia partecipazione agli eventi SCRUM affrontati nel periodo di stage, in modo da ampliare la mia formazione sulle metodologie \gls{agile}.
 \subsection{Vincoli Tecnologici}
 L'azienda non ha imposto veri e propri vincoli sulle tecnologie da utilizzare per portare a termine gli obiettivi. Tuttavia, sia per la parte infrastrutturale che per quella applicativa, sarebbe stato preferibile proporre una soluzione che utilizzasse linguaggi di programmazione già adottati all'interno del team Legalmail, in modo da abbattere l'eventuale \gls{debito-tecnico} d'ingresso. \\
 Eventuali prodotti che interagissero con l'infrastruttura esistente avrebbero comunque dovuto rispettare i vincoli tecnologici della stessa. 
