@@ -13,7 +13,7 @@ Gli obiettivi dello studio possono riassumersi nel trovare una procedura di appr
 \end{itemize}
 \subsection{Infrastructure as Code}
 Prima di vagliare le soluzioni presenti sul mercato è stato svolto uno studio teorico sul mondo del \gls{cloud}, per permetterne una migliore comprensione dei concetti e della terminologia che lo definiscono. \\
-Questo studio, adattato agli obiettivi sopraelencati, è confluito nell'Infrastructure as Code (IaC)\footcite{article:iac}: un'approccio che sta alla base della filosofia \gls{devops} e che consiste nel gestire l'infrastruttura aziendale come se fosse un prodotto software: definita tramite codice versionato, testato e aderente a tutte le altre pratiche comuni allo sviluppo software. \\
+Questo studio, adattato agli obiettivi sopraelencati, è confluito nell'Infrastructure as Code (IaC)\footcite{article:iac}: un approccio che sta alla base della filosofia \gls{devops} e che consiste nel gestire l'infrastruttura aziendale come se fosse un prodotto software: definita tramite codice versionato, testato e aderente a tutte le altre pratiche comuni allo sviluppo software. \\
 L'IaC, nel contesto della gestione di server atti a ospitare applicativi, si compone di quattro grandi macro fasi/componenti così definite\footcite{article:iac-components}:
 \begin{enumerate}
 	\item \textbf{Provisioning}: atta a creare ed avviare le macchine fisiche e/o virtuali, conferendogli le risorse necessarie (CPU, RAM, Hard-disk, etc.) e installando il software per il configuration management;
@@ -21,7 +21,7 @@ L'IaC, nel contesto della gestione di server atti a ospitare applicativi, si com
 	\item \textbf{Deployment}: atta a distribuire l'applicativo sulle macchine istanziate, gestendone le versioni e i rollback: ripristino della versione precedente in caso di errori;
 	\item \textbf{Orchestration}: atta a orchestrare tutte le varie fasi elencate in precedenza, definendo ordine, modalità d'esecuzione e tutte le configurazioni necessarie in modo da rendere più agile la gestione di infrastrutture molto grandi.
 \end{enumerate}
-Va specificato che queste fasi non sono fisse ma possono mischiarsi tra loro: ad esempio nella fase di provisioning possono essere impostate variabili d'ambiente o la fase di configuration management può occuparsi dell'aggiornamento di versione dell'applicativo. Questo accade perchè molti strumenti presenti sul mercato non si limitano a gestire una sola fase, ma ne inglobano diverse (come Ansible\footcite{site:ansible} ad esempio), centralizzando la gestione dell'infrastruttura. \\
+Va specificato che queste fasi non sono fisse ma possono mischiarsi tra loro: ad esempio nella fase di provisioning possono essere impostate variabili d'ambiente o la fase di configuration management può occuparsi dell'aggiornamento di versione dell'applicativo. Questo accade perché molti strumenti presenti sul mercato non si limitano a gestire una sola fase, ma ne inglobano diverse (come Ansible\footcite{site:ansible} ad esempio), centralizzando la gestione dell'infrastruttura. \\
 Queste componenti dovevano poi rientrare nel contesto dei \textit{disposable servers}: server usa e getta creati per svolgere un determinato compito ed essere distrutti immediatamente dopo. L'esecuzione dei test di carico infatti non necessita di un servizio attivo perennemente, quindi l'istanziazione di server dedicati allo scopo e poi cancellati al termine avrebbe permesso un abbattimento dei costi. \\
 L'ultimo componente della ricerca era quindi una piattaforma di \gls{cloud} che permettesse la creazione di questi disposable servers.
 \subsection{Cloud Platform}
@@ -33,10 +33,10 @@ Un'altra categorizzazione importante è quella che fa AWS sulle istanze a presta
 Considerata la mia personale esperienza pregressa e la migrazione di alcuni servizi aziendali verso questa piattaforma, AWS è stata etichettata come la soluzione più conforme. In particolare è stata concordata la scelta delle istanze EC2 tipo C5: ottimizzate per il calcolo e a prestazione fissa.
 \subsection{Provisioner}
 Per lo studio degli strumenti di provisioning orientati all'IaC sono state analizzate in primis le soluzioni proposte direttamente dai Cloud Provider: \textbf{AWS Cloud Formation}, \textbf{GCP Deployment Manager} e \textbf{MA Automation}. L'ultima è stata immediatamente accantonata in quanto valutata un po' acerba e complessa da utilizzare. \\
-Successivamente sono state analizzate due soluzioni a se stanti: \textbf{Terraform} e \textbf{Ansible}. Il primo è uno strumento sviluppato da HashiCorp che sta emergendo sempre più rapidamente grazie alla sua facilità d'utilizzo e le innumerevoli integrazioni con servizi esterni, il secondo invece è un tool ben maturo che, presentato inizialmente come Configuration Manager, si è trasformato negli anni come strumento di gestione dell'IaC a tutto tondo.\\
+Successivamente sono state analizzate due soluzioni a se stanti: \textbf{Terraform}\footcite{site:terraform} e \textbf{Ansible}. Il primo è uno strumento sviluppato da HashiCorp che sta emergendo sempre più rapidamente grazie alla sua facilità d'utilizzo e le innumerevoli integrazioni con servizi esterni, il secondo invece è un tool ben maturo che, presentato inizialmente come Configuration Manager, si è trasformato negli anni come strumento di gestione dell'IaC a tutto tondo.\\
 Questi strumenti sono stati valutati su quattro diversi aspetti:
 \begin{itemize}
-	\item \textbf{Piattaforme Supportate}: le piattaforme di cloud sul quale può lavorare lo strumento;
+	\item \textbf{Piattaforme Supportate}: le piattaforme di Cloud sul quale può lavorare lo strumento;
 	\item \textbf{Configurazione}: la modalità di configurazione: dichiarativa, dove l'utente specifica \textit{cosa} gli serve e il software si occupa di \textit{come} implementare; imperativa dove l'utente è responsabile del \textit{cosa} e del \textit{come};
 	\item \textbf{Modifiche}: la gestione delle modifiche all'infrastruttura: indipendente, dove il software capisce se creare o eliminare le macchine in base ai parametri; manuale dove l'utente si occupa di questo aspetto;
 	\item \textbf{Esecuzione}: la modalità di esecuzione del software: \gls{cli}, ideale per l'automazione; \gls{gui}, ideale per l'utilizzo da parte dell'utente.
@@ -60,8 +60,8 @@ Questi strumenti sono stati valutati su quattro diversi aspetti:
 
 L'analisi ha decretato \textbf{Terraform} come soluzione più adeguata per i seguenti motivi:
 \begin{enumerate}
-	\item \textbf{Semplicità}: questo software è molto facile da utilizzare, con poche righe del DSL (chiaro ed espressivo) è possibile approvvigionare una flotta di server di dimensione elevate. Inoltre la modalità di configurazione dichiarativa e la gestione automatica delle modifiche permette all'utente di non arrovellarsi troppo sul come implementare l'infrastruttura. In più la distruzione delle macchine avviene tramite un semplice comando da \gls{cli}, rendendo facile l'implementazione dei disposable servers;
-	\item \textbf{Flessibilità}: Terraform non è legato ad una sola piattaforma di Cloud ma stimola i provider\footcite{article:terraformextend} a sviluppare il proprio plugin per integrarsi con il programma. Questo permette di avere flessibilità nell'infrastruttura e nel futuro potranno essere scritte soluzioni ad hoc per l'infrastruttura aziendale interna;
+	\item \textbf{Semplicità}: questo software è molto facile da utilizzare, con poche righe del \gls{dsl} (chiaro ed espressivo) è possibile approvvigionare una flotta di server di dimensione elevate. Inoltre la modalità di configurazione dichiarativa e la gestione automatica delle modifiche permette all'utente di non arrovellarsi troppo sul come implementare l'infrastruttura. In più la distruzione delle macchine avviene tramite un semplice comando da \gls{cli}, rendendo facile l'implementazione dei disposable servers;
+	\item \textbf{Flessibilità}: Terraform non è legato ad una sola piattaforma di Cloud ma stimola i provider\footcite{article:terraformextend} a sviluppare il proprio \gls{plugin} per integrarsi con il programma. Questo permette di avere flessibilità nell'infrastruttura e nel futuro potranno essere scritte soluzioni ad hoc per l'infrastruttura aziendale interna;
 	\item \textbf{Documentazione}: la documentazione è chiara e completa e viene aggiornata molto spesso. La community inoltre è molto attiva ed è molto facile ricavare soluzioni;
 	\item \textbf{Coerenza}: Terraform si concentra su un solo aspetto dell'IaC e lo fa molto bene: il provisioning. Questo permette di relegare al software questo unico aspetto, rendendo più strutturato ed immediato il codice che verrà eseguito;
 	\item \textbf{Verificabilità}: Terraform è predisposto all'analisi dinamica delle sue configurazioni\footcite{article:terraformtest}.
@@ -69,10 +69,10 @@ L'analisi ha decretato \textbf{Terraform} come soluzione più adeguata per i seg
 \subsection{Configuration Management}
 La gestione della configurazione all'interno dell'azienda è effettuata tramite Puppet, rendendo non necessaria la ricerca di un altro strumento.  
 \subsection{Deployment}
-All'interno dell'azienda la fase di deploy viene gestita direttamente da Puppet.
+All'interno dell'azienda la fase di \gls{deploy} viene gestita direttamente da Puppet.
 \subsection{Orchestrator}
 Per la scelta dell'orchestratore sono stati accantonati preventivamente prodotti come Kubernetes\footcite{site:kubernetes}, Nomad\footcite{site:nomad} e simili, questi infatti, oltre a richiedere l'utilizzo di \gls{container-system} come Docker\footcite{site:docker} o Packer\footcite{site:packer}, sono orientati per architetture a 	\gls{microservizi}, dove più componenti differenti comunicano tra di loro. L'esecuzione dei test di carico avviene invece tramite un solo servizio, JMeter, che viene replicato su più server. \\
-La scelta quindi si è spostata verso una soluzione ad hoc, sviluppata internamente, integrabile con diversi approcci:
+La scelta quindi si è spostata verso una soluzione ad hoc, sviluppata internamente, implementabile con diversi approcci:
 \begin{itemize}
 	\item Scrittura di uno script bash parametrizzabile;
 	\item Sviluppo di un \gls{plugin} per Jenkins;
@@ -80,7 +80,7 @@ La scelta quindi si è spostata verso una soluzione ad hoc, sviluppata intername
 	\item Progettazione di una utility in Python focalizzata sull'estensibilità, in modo da poter adattare l'esecuzione dei test di carico in caso di necessità future.
 \end{itemize}
 \subsection{Soluzione proposta}
-Al termine dell'analisi la soluzione proposta è stata la progettazione di un orchestratore in Python, che sfruttasse Terraform e Puppet per l'approvvigionamento e configurazione dell'infrastruttura (Cluster), eseguisse i test di carico, consumasse i dati in una maniera concordata e infine sfruttasse Terrafom per distruggere l'infrastruttura appena creata. \\
+Al termine dell'analisi la soluzione proposta è stata la progettazione di un orchestratore in Python, che sfruttasse Terraform e Puppet per l'approvvigionamento e configurazione dell'infrastruttura (Cluster), eseguisse i test di carico, consumasse i dati in una maniera concordata e infine sfruttasse Terraform per distruggere l'infrastruttura appena creata. \\
 Eventualmente, questo orchestratore in Python potrebbe essere integrato con Jenkins.
 \begin{figure}[H]
 	\centering

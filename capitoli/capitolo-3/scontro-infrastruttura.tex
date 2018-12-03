@@ -3,14 +3,14 @@
 % !TEX root = ../../tesi.tex
 \subsection{Provisioning nell'intranet}
 La soluzione proposta discussa nella sezione precedente, seppur condivisa dal tutor aziendale, ha dovuto subire degli accorgimenti per aderire agli standard aziendali.\\
-Come spiegato nella sezione \hyperref[subsec:infra]{Infrastruttura e Applicazioni}, il provisioning delle macchine virtuali all'interno dell'\gls{intranet} deve rispettare gli standard definiti dal team \textit{Infrastructure}, che attualmente prevede l'instanziazione dei server solo tramite Foreman. Inoltre le policy aziendali, allo status attuale, non permettono l'integrazione con le \gls{apig} di Foreman, rendendo troppo oneroso lo sviluppo di un automatismo di provisioning. \\
-L'integrazione con i servizi di AWS inoltre, seppure già adottati in piccola parte per alcuni servizi aziendali, richiede la collaborazione sia con il team \textit{Infrastructure} che con il team \textit{Network}, responsabile della gestione dell'instrastruttura di rete.
+Come spiegato nella sezione \hyperref[subsec:infra]{Infrastruttura e Applicazioni}, il provisioning delle macchine virtuali all'interno dell'\gls{intranet} deve rispettare gli standard definiti dal team \textit{Infrastrutture}, che attualmente prevede l'istanziazione dei server solo tramite Foreman. Inoltre le policy aziendali, allo status attuale, non permettono l'integrazione con le \gls{apig} di Foreman, rendendo troppo oneroso lo sviluppo di un automatismo di provisioning. \\
+L'integrazione con i servizi di AWS inoltre, seppure già adottati in piccola parte per alcuni servizi aziendali, richiede la collaborazione sia con il team \textit{Infrastrutture} che con il team \textit{Network}, responsabile della gestione dell'infrastruttura di rete.
 
 \subsection{Piano di lavoro}
-A seguito di queste considerazioni è stato approvato il progetto dell'orchestratore in python, denominato \textbf{JMeterOrchestrator}, che, oltre alla gestione delle meccaniche di JMeter, avrebbe dovuto permettere due modalità d'uso:
+A seguito di queste considerazioni è stato approvato il progetto dell'orchestratore in Python, denominato \textbf{JMeterOrchestrator}, che, oltre alla gestione delle meccaniche di JMeter, avrebbe dovuto permettere due modalità d'uso:
 \begin{enumerate}
 	\item \textbf{Provisioning Interno (Obbligatorio)}: utilizzando l'infrastruttura aziendale, ovvero creando a priori le istanze tramite Foreman e utilizzandole tramite l'orchestratore;
-	\item \textbf{Provisioning Esterno (Opzionale)}: sfruttando terraform per creare i disposable servers su AWS direttamente dall'orchestratore.
+	\item \textbf{Provisioning Esterno (Opzionale)}: sfruttando Terraform per creare i disposable servers su AWS direttamente dall'orchestratore.
 \end{enumerate}
 Il consumo dei risultati, inoltre, si sarebbe tradotto con l'invio di una E-Mail, contenente i dati prodotti, al personale del team Legalmail. \\
 L'installazione di JMeterOrchestrator sarebbe comunque dovuta avvenire all'interno della rete aziendale.

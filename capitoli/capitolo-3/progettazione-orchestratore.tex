@@ -2,7 +2,7 @@
 % !TEX TS-program = pdflatex
 % !TEX root = ../../tesi.tex
 \subsection{JMeter - Modalità Distribuita}
-Prima di descrivere la progettazione di JMeterOrchestrator, vorrei inizare questa sezione con una panoramica del funzionamento di JMeter in modalità distribuita (cluster mode), in modo da chiarire quali azioni fossero direttamente gestite da JMeter e specificare quali procedure invece sarebbero state prese in carico dall'orchestratore. \\
+Prima di descrivere la progettazione di JMeterOrchestrator, vorrei iniziare questa sezione con una panoramica del funzionamento di JMeter in modalità distribuita (cluster mode), in modo da chiarire quali azioni fossero direttamente gestite da JMeter e specificare quali procedure invece sarebbero state prese in carico dall'orchestratore. \\
 JMeter quando viene eseguito in cluster mode si divide in due entità:
 \begin{itemize}
 	\item \textbf{Master}: la macchina, fisica o virtuale, responsabile di coordinare le macchine slave e collezionare i dati da queste prodotti.
@@ -14,18 +14,18 @@ Dove i parametri possiedono il seguente significato:
 \begin{itemize}
 	\item \textbf{-n}: non aprire la \gls{gui}, in modo da risparmiare RAM;
 	\item \textbf{-t}: indica il file da utilizzare come test;
-	\item \textbf{-R}: specifica gli indirizzi ip degli slaves da usare per l'esecuzione del test;
+	\item \textbf{-R}: specifica gli indirizzi IP degli slaves da usare per l'esecuzione del test;
 	\item \textbf{-l}: indica dove salvare i risultati;
 	\item \textbf{-e -o}: indica dove generare il report HTML.
 \end{itemize}
-Il master assume quindi che gli slaves esistano e il server RMI, responsabile di ricevere le indicazione dal master, sia attivo e in stato di ricezione. Il master si assume poi la responsabilità di distribuire il file di test agli slaves, ma, eventuali file di dati (utili per specificare le credenziali degli utenti da simulare o altre configurazioni) devono essere caricati sulle macchine slaves a mano.\\
-I file di test, suffissi \textit{jmx}, non solo racchiudono le richieste da effettuare sulla macchina target ma specificano anche la configurazione del carico da applicare, richiedendo una modifica del file di test in caso si voglia aggiustare qualche parametro della Load Generation. \\
-In ultimo i file generati da JMeter vengono semplicemente scritti su disco ma non consumanti in qualsivoglia modo, questa caratteristica non è adatta per la realizzazione dei disposable servers, questi infatti vengono eliminati alla fine dei test, cancellando a loro volta i dati prodotti. \\
+Il master assume quindi che gli slaves esistano e il server \gls{rmi}, responsabile di ricevere le indicazione dal master, sia attivo e in stato di ricezione. Il master si assume poi la responsabilità di distribuire il file di test agli slaves, ma, eventuali file di dati (utili per specificare le credenziali degli utenti da simulare o altre configurazioni) devono essere caricati sulle macchine slaves a mano.\\
+I file di test, suffissi \texttt{jmx}, non solo racchiudono le richieste da effettuare sulla macchina target ma specificano anche la configurazione del carico da applicare, richiedendo una modifica del file di test in caso si voglia aggiustare qualche parametro della Load Generation. \\
+In ultimo i file generati da JMeter vengono semplicemente scritti su disco ma non consumati in qualsivoglia modo, questa caratteristica non è adatta per la realizzazione dei disposable servers, questi infatti vengono eliminati alla fine dei test, cancellando a loro volta i dati prodotti. \\
 In sostanza quindi JMeter gestisce solo il coordinamento delle macchine slave, mentre sarà compito dell'orchestratore:
 \begin{itemize}
-	\item Assicurarsi che le macchine slave esistano (creandole eventualmente) e che abbiano il server RMI attivo;
+	\item Assicurarsi che le macchine slave esistano (creandole eventualmente) e che abbiano il server \gls{rmi} attivo;
 	\item Distribuire eventuali file di dati alle macchine slaves;
-	\item Prevedere una modalità di modifica della configurazione di carico senza richiedere la riscrittura del file \textit{jmx};
+	\item Prevedere una modalità di modifica della configurazione di carico senza richiedere la riscrittura del file \texttt{jmx};
 	\item Notificare l'avvenuto termine dei test, consegnando i file di risultati prodotti al team Legalmail via E-Mail.
 \end{itemize}
 \subsection{Principi}
@@ -35,7 +35,7 @@ L'acrostico SOLID, descritto da Robert C. "Uncle Bob" Martin\footcite{book:desig
 \begin{enumerate}
 	\item \textbf{Single Responsability Principle (SRP)}: afferma che ogni classe dovrebbe avere una ed una sola responsabilità, interamente incapsulata al suo interno. Questa caratteristica troverà riscontro tramite la realizzazione dei \textbf{components}, come verrà specificato nella sezione successiva;
 	\item \textbf{Open/Closed Principle (OCP)}: afferma che un'entità software dovrebbe essere aperta alle estensioni, ma chiusa alle modifiche. Su questo principio è stata riposta molta attenzione in quanto, come spiegato nella sezione precedente, le possibili evoluzioni del prodotto sarebbero dovute risultare poco onerose da implementare;
-	\item \textbf{Liskov Substitution Principle (LSP)}: afferma che gli oggetti dovrebbero poter essere sostituiti con dei loro sottotipi, senza alterare il comportamento del programma che li utilizza. Questa caratteristica è implementata di default in python, in quanto linguaggio aderente al \gls{duck-typing};
+	\item \textbf{Liskov Substitution Principle (LSP)}: afferma che gli oggetti dovrebbero poter essere sostituiti con dei loro sottotipi, senza alterare il comportamento del programma che li utilizza. Questa caratteristica è implementata di default in Python, in quanto linguaggio aderente al \gls{duck-typing};
 	\item \textbf{Interface Segregation Principle (ISP)}: afferma che sarebbero preferibili più interfacce specifiche, che una singola generica. Questa principio viene rispettato con la definizione di più interfacce \textbf{actions} seppur strutturalmente simili, come verrà spiegato nelle sezioni successive;
 	\item \textbf{Depedency Inversion Principle (DIP)}: afferma che una classe dovrebbe dipendere dalle astrazioni, non da classi concrete. Come indicato nella struttura del \textbf{Core} dell'orchestratore.
 \end{enumerate} 
@@ -57,7 +57,7 @@ Il cuore di JMeterOrchestrator è stato progettato in modo da rispettare i princ
 Questi elementi specializzati prendono il nome di \textbf{actions} e sono descritti da sette interfacce che, una volta implementate, assumono le seguenti responsabilità:
 \begin{itemize}
 	\item \textbf{Wizard}: responsabile di normalizzare le configurazioni e/o i parametri ricevuti dall'utente in modo da essere utilizzabili dall'orchestratore. Eventualmente il Wizard si occupa anche di creare e iniettare la actions (dipendenze);
-	\item \textbf{Provisioner}: responsabile di configurare le macchine slaves ed eventualmente master, tramite una potenziale creazione, per l'esecuzione dei test e, una volta terminato, di riportarle allo stato originario, con eventuale distruzione;
+	\item \textbf{Provisioner}: responsabile di configurare le macchine slaves ed eventualmente master, tramite una potenziale creazione, per l'esecuzione dei test e, una volta terminato, di riportarle allo stato originario, con eventuale distruzione. Il processo eseguito al termine dei test prende il nome di \textit{cleanup};
 	\item \textbf{Dealer}: responsabile di distribuire alle macchine slaves i file di input necessari per l'esecuzione dei test;
 	\item \textbf{Parser}: responsabile di modificare la configurazione del file \texttt{jmx} secondo i parametri immessi dall'utente;
 	\item \textbf{Runner}: responsabile di avviare la macchina master per l'esecuzione dei test;

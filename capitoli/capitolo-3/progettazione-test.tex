@@ -33,7 +33,7 @@ Lo scenario di test è stato composto dai i seguenti step:
 	\item Visualizzazione della pagina \texttt{/my\_messages.php} con utente autorizzato.
 \end{enumerate}
 La capacità prestazionale viene intesa come il numero massimo di utenti attivi (thread) generabili dalla macchina analizzata senza perdere accuratezza nelle misurazioni e/o portare al \gls{crash} del programma JMeter.\\ 
-L'analisi quindi è stata condotta eseguendo i test su una singola macchina slave, aumentando, ad ogni iterazione avvenuta con successo, il numero di thread da generare fino all'incorrere di una delle seguenti condizioni rappresentanti il limite del server in analisi:
+L'analisi quindi è stata condotta eseguendo i test su una singola macchina slave, aumentando, ad ogni iterazione avvenuta con successo, il numero di thread da generare fino all'incorrere di una delle seguenti condizioni rappresentanti il limite del server in esame:
 \begin{itemize}
 	\item \textbf{Non accuratezza delle misurazioni}: se le misurazioni dei tempi di risposta fossero risultate troppo distanti dalle misurazioni rilevate nell'iterazione precedente;
 	\item \textbf{Instabilità}: se la macchina non fosse stata in grado di mantenere stabile il numero di thread generati durante l'esecuzione del test;

@@ -56,7 +56,7 @@ Wrk\footcite{site:wrk} è un tool amatoriale pubblicato per la prima volta nel 2
 Onestamente non c'è troppo da dire su Wrk, partendo dalla documentazione ufficiale praticamente inesistente, le funzionalità offerte da Wrk non offrono tanto spazio di manovra.
 È il tool più potente per quanto riguarda il throughput grezzo su una singola macchina ed è l'unico strumento in grado di utilizzare al 100\% le risorse della CPU in condizioni ottimali: target server immediato nella risposta e basso peso, in byte, della richiesta inviata. Con scenari di test più complessi inoltre il tool perde accuratezza nelle misurazioni dei tempi di riposta, diventando poco utile. \\
 Non offre la possibilità di distribuire l'esecuzione dei test su più macchine e in rete non si trovano argomenti per farlo a mano, suggerendo che questo non è il suo caso d'uso.
-La \gls{cli} è comoda e permette di integrare scenari più complessi utilizzando il linguaggio di scripting Lua che permette anche di convertire i risultati nel formato di output desiderato.
+La \gls{cli} è comoda e permette di integrare scenari più complessi utilizzando il linguaggio di scripting Lua\footcite{site:lua} che permette anche di convertire i risultati nel formato di output desiderato.
 I report sono poco esaustivi, \gls{out-of-the-box} è offerta solo la visualizzazione in \gls{cli} ma le metriche raccolte sono generiche e non permettono un'analisi dettagliata.\\
 Non esiste letteratura per quanto riguarda eventuali integrazioni in \gls{integrazione-continua}, suggerendo anche qui che per l'automazione non è il miglior tool, a meno di personalizzazioni in Lua.
 \subsubsection{Apachebench}
@@ -66,8 +66,7 @@ Genera un carico dimezzato rispetto a Wrk ma offre un report ed un'accuratezza m
 L'esecuzione avviene via \gls{cli} e permette di configurare comodamente diversi parametri.\\
 Ottimo per test semplici e feedback immediati ma non adeguato per integrazione in \gls{integrazione-continua} e stesura di scenari complessi.
 \subsubsection{Tsung}
-%TODO -> citazione a loadimpact: "le funzionalità ci sono, l'usabilità un po' meno"
-Nato nel 2001 come successore di Tsunami IDX,Tsung\footcite{site:tsung} è uno strumento di test di carico multi protocollo scritto in Erlang, robusto e maturo: tra le sue funzionalità prevede la registrazione del browser e il supporto \gls{out-of-the-box} per l'esecuzione dei test in modalità distribuita.\\
+Nato nel 2001 come successore di Tsunami IDX,Tsung\footcite{site:tsung} è uno strumento di test di carico multi protocollo scritto in Erlang\footcite{site:erlang}, robusto e maturo: tra le sue funzionalità prevede la registrazione del browser e il supporto \gls{out-of-the-box} per l'esecuzione dei test in modalità distribuita.\\
 Gli scenari di test vengono scritti in XML ma a differenza di JMeter non offre un'interfaccia grafica per aiutare la scrittura degli scenari, nonostante il \gls{dsl} di Tsung sia molto più chiaro e facile da apprendere rispetto a quello di JMeter. Eventualmente possono essere scritti scenari più complessi con l'ausilio di Erlang. \\
 Il report generato è molto esaustivo ed oltre ai risultati statistici finali offre la possibilità di monitorare le statistiche d'esecuzione in tempo reale tramite un'intuitiva interfaccia web. I dati finali possono essere esportati in JSON e la loro struttura è ben documentata in modo da poter esser facilmente consumati da altre piattaforme di reportistica.\\
 Tsung è sicuramente un prodotto pronto per l'enterprise ma è accompagnato da due maggiori inconvenienti: l'usabilità e la predisposizione all'integrazione continua. \\
@@ -76,9 +75,9 @@ Per quanto riguarda l'\gls{integrazione-continua}, Tsung non presenta \gls{plugi
 In definitiva, Tsung è un ottimo prodotto: robusto, maturo e versatile, avente l'unica pecca di presentare un design non al passo con le metodologie di sviluppo software moderne	. 
 \subsubsection{Artillery}
 Artillery\footcite{site:artillery} è un tool di test di carico nato da sviluppatori per sviluppatori, è sviluppato in Javascript ed è orientato verso le infrastrutture di \gls{integrazione-continua} proponendo un sistema per bollare il test come riuscito o fallito al termine della sua esecuzione. \\
-È possibile configurare il carico e gli scenari di test tramite YAML (o JSON) che offrono la possibilità di integrare codice Javascript.
-È estensibile tramite \gls{plugin} (la community ne offre già diversi) e offre la possibilità di testare non solo HTTP ma anche WebSocket e Socket.io, suggerendo una propensione per l'ambiente Javascript da parte degli sviluppatori. \\
-I report prodotti sono relativi all'analisi statistica finale e vengono forniti in formato HTML ma è possibile esportare i report in CSV o integrarsi database tramite integrazioni via \gls{plugin}. \\
+È possibile configurare il carico e gli scenari di test tramite \gls{yaml} (o JSON) che offrono la possibilità di integrare codice Javascript.
+È estensibile tramite \gls{plugin} (la community ne offre già diversi) e offre la possibilità di testare non solo HTTP ma anche \gls{websocket} e Socket.IO\footcite{site:socketio}, suggerendo una propensione per l'ambiente Javascript da parte degli sviluppatori. \\
+I report prodotti sono relativi all'analisi statistica finale e vengono forniti in formato HTML ma è possibile esportare i report in CSV o integrarsi a database tramite integrazioni via \gls{plugin}. \\
 Le prestazioni non sono ottimali: il tool non riesce a generare un grande carico e non è prevista una modalità di esecuzione distribuita se non acquistando la versione Enterprise che grazie all'integrazione con AWS riesce a distribuire l'esecuzione su più macchine migliorandone le performance. \\
 Inoltre il software non riesce a sfruttare le CPU multicore anche se questa funzionalità è prevista nella rilascio della seconda versione del prodotto.
 \subsubsection{Siege}
